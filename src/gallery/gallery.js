@@ -1432,8 +1432,11 @@
       '<style>\n' + tokens() + '\n<\/style>\n' +
       '<style>\nbody{margin:0;min-height:100vh;display:grid;place-items:center;padding:48px 24px;background:var(--ux-page);box-sizing:border-box}\n' +
       '.ux-theme-btn{position:fixed;top:16px;right:16px;height:38px;padding:0 16px;border-radius:999px;border:1px solid var(--ux-line-2);background:var(--ux-surface);color:var(--ux-ink);font:600 13px/1 system-ui,sans-serif;cursor:pointer}\n<\/style>\n' +
-      '</head>\n<body>\n' + c.html + '\n' +
+      // 主题按钮必须放在组件之前：组件脚本用 document.currentScript.previousElementSibling 找根节点，
+      // 如果把按钮夹在中间，下载下来的单文件里脚本就找不到根节点（上游原有顺序会导致交互失效，这里修正）
+      '</head>\n<body>\n' +
       '<button class="ux-theme-btn" type="button" id="ux-theme-btn">' + esc(t('themeBtn')) + '</button>\n' +
+      c.html + '\n' +
       '<script>\n' + c.js + '\n<\/script>\n' +
       '<script>\n(function(){var r=document.documentElement,b=document.getElementById("ux-theme-btn"),K="ux-theme";' +
       'try{var s=localStorage.getItem(K);if(s)r.setAttribute("data-theme",s)}catch(e){}' +

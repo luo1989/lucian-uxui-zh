@@ -245,14 +245,20 @@ for (const id of SAMPLE_IDS) {
     }
     const root = tile.querySelector('.g-stage .ux');
     const cap = tile.querySelector('.g-cap span');
+    // 在组件里点一下可交互控件，确认汉化后的脚本没有失效（不会抛异常、不会跳转）
+    let clicked = '';
+    const hit = root && root.querySelector('button, [role="button"], input, [role="switch"], [role="tab"]');
+    if (hit) { clicked = (hit.className || hit.tagName).toString().slice(0, 40); try { hit.click(); } catch (e) { clicked += ' ERR:' + e.message; } }
+    await new Promise((res) => setTimeout(res, 220));
     return {
       id: sid, hasRoot: !!root, cls: root ? root.className : '', children: root ? root.childElementCount : 0,
       title: cap ? cap.textContent : '', count: +document.querySelector('#count').textContent,
+      clicked, stillThere: !!document.querySelector('.g-stage .ux'),
       hangul: /[\uAC00-\uD7A3]/.test(tile.innerText || '')
     };
   }, id);
   mounted.push(r);
-  add(`抽查 ${id} 真实挂载正常`, r.hasRoot && r.children > 0 && /ux u\d{3}/.test(r.cls) && !r.hangul, `${r.title} · 子节点 ${r.children} · 命中 ${r.count}`);
+  add(`抽查 ${id} 挂载 + 交互`, r.hasRoot && r.children > 0 && /ux u\d{3}/.test(r.cls) && r.stillThere && !/ERR:/.test(r.clicked || '') && !r.hangul, `${r.title} · 子节点 ${r.children} · 点击 ${r.clicked || '无可点控件'}`);
 }
 await page.evaluate(async () => {
   const input = document.querySelector('#q');
@@ -260,6 +266,27 @@ await page.evaluate(async () => {
   input.dispatchEvent(new Event('input', { bubbles: true }));
   await new Promise((res) => setTimeout(res, 400));
 });
+
+/* ---------- 7b. 复制/下载出来的中文代码单独运行：脚本不能因为汉化失效 ---------- */
+const standaloneIds = ['001', '092', '129', '253', '399'];
+const standaloneDocs = await page.evaluate((ids) => ids.map((id) => {
+  const it = UXG.ITEMS.find((x) => x.id === id);
+  return { id, html: UXG.standaloneOf(it) };
+}), standaloneIds);
+const sp = await ctx.newPage();
+const standaloneErrors = [];
+sp.on('pageerror', (e) => standaloneErrors.push(String(e.message).slice(0, 200)));
+for (const doc of standaloneDocs) {
+  await sp.setContent(doc.html, { waitUntil: 'load' });
+  await sp.waitForTimeout(500);
+  const st = await sp.evaluate(() => {
+    const r = document.querySelector('.ux');
+    return { has: !!r, children: r ? r.childElementCount : 0, text: (r && r.innerText || '').replace(/\s+/g, ' ').slice(0, 40), themeBtn: !!document.querySelector('#ux-theme-btn') };
+  });
+  add(`单独运行 ${doc.id} 的中文代码`, st.has && st.children > 0 && st.themeBtn, `${st.children} 个子节点 · ${st.text}`);
+}
+add('单独运行无脚本异常', standaloneErrors.length === 0, standaloneErrors.slice(0, 3).join(' | '));
+await sp.close();
 
 /* ---------- 8. Reels 全屏与键盘 ---------- */
 const reelRes = await page.evaluate(async () => {
