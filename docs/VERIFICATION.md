@@ -64,6 +64,10 @@
 | 加载动画 | 18 | 258 / 079 骨架屏 / 080 轨道汇聚的同步加载动画 |
 | 液态玻璃 | 3 | 001 液态玻璃按钮 / 332 / 294 |
 | 页面切换 | 9 | 321 幕布式页面转场 / 308 / 324 推入式页面堆栈 |
+| 088（按编号） | 1 | 088 吞掉纸张的空文件夹 |
+
+搜索实现：标题命中 6 分 > 标签/分类/中文关键词 5 分 > 说明 3 分 > 编号完全匹配 7 分 > 中文两字切分兜底 1 分；
+多词查询按 AND 组合，结果按分数排序。
 
 ### 抽查的 25 个组件
 
@@ -73,7 +77,7 @@
 
 | 指标 | 线上实测 |
 |---|---|
-| 首页加载（load 事件） | 1,489 ms |
+| 首页加载（load 事件） | 1,634 ms（多次运行 1.0–1.6 s） |
 | DOMContentLoaded | 1,413 ms |
 | 传输体积（brotli） | 1,068 KB |
 | 解码后体积 | 4.00 MB |
@@ -86,7 +90,8 @@
 | Cloudflare Pages 项目 | `lucian-uxui-zh`（独立项目，未改动其他项目） |
 | 默认域名 | https://lucian-uxui-zh.pages.dev/ |
 | 首次部署（wrangler 直传） | deployment `16950f15` |
-| GitHub Actions 自动部署 | `.github/workflows/deploy.yml`，push `main` 触发，已验证 3 次成功 |
+| 生产部署（最终） | `7fa61c31`（GitHub Actions） |
+| GitHub Actions 自动部署 | `.github/workflows/deploy.yml`，push `main` 触发，已验证 5 次成功（23–31 s） |
 | 密钥管理 | 使用仅含 `Pages:Read/Write` 权限的独立 API Token，存于 GitHub Secrets，未写入仓库 |
 | 自定义域名 | 未绑定（避免改动现有域名 DNS）；如需可后续在 Pages 控制台加子域 |
 
