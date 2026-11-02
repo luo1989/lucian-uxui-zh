@@ -94,7 +94,10 @@
 | 生产部署（最终） | `7fa61c31`（GitHub Actions） |
 | GitHub Actions 自动部署 | `.github/workflows/deploy.yml`，push `main` 触发，已验证 5 次成功（23–31 s） |
 | 密钥管理 | 使用仅含 `Pages:Read/Write` 权限的独立 API Token，存于 GitHub Secrets，未写入仓库 |
-| 自定义域名 | 已绑定 `uxui.skyagentai.xyz`，未改动主站 `skyagentai.xyz` / `www` 记录 |
+| 自定义域名 | 已绑定 `uxui.skyagentai.xyz`（CNAME → `lucian-uxui-zh.pages.dev`，Proxied），未改动主站 `skyagentai.xyz` / `www` 记录 |
+| 自定义域名 TLS | Cloudflare 自动签发，CN=`uxui.skyagentai.xyz`，有效期至 2027-01-31 |
+| 自定义域名验收 | 同一套 78 项自动化测试全部通过（`https://uxui.skyagentai.xyz/`，加载 2.0 s，传输 1,068 KB） |
+| 主站影响 | `skyagentai.xyz` / `www` / `api.skyagentai.xyz/health` 均 200，未受影响 |
 
 ## 6. 未验证 / 已知限制
 
