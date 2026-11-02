@@ -22,11 +22,18 @@ jobs:
           node-version: '22'
 
       - name: Build site (ZH_STRICT)
-        run: node src/build.mjs --site
+        run: ZH_STRICT=1 node src/build.mjs --site
+
+      - name: Verify build output (Cloudflare Pages limits)
+        run: |
+          ls -la dist
+          test $(find dist -type f | wc -l) -le 20000
+          test $(find dist -type f -size +25M | wc -l) -eq 0
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: '4'
           command: pages deploy dist --project-name=lucian-uxui-zh --branch=main
