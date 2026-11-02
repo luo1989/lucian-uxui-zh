@@ -76,7 +76,15 @@ npm test                     # 需要本机安装 Google Chrome；会跑桌面 +
 ```
 
 `tools/smoke-test.mjs` 会检查：默认中文、400 个组件的中文覆盖、中文搜索关键词、收藏持久化、
-复制提示词/代码、三语切换、随机抽查组件的挂载与动画、移动端布局、控制台异常与资源 404。
+复制提示词/代码、三语切换、25 个组件的挂载与交互、下载代码独立运行、移动端布局、控制台异常与资源 404。
+
+**线上实测 78 项全部通过**，详细记录（含构建体积、平台限制核对、搜索命中样例、未验证事项）见
+[docs/VERIFICATION.md](docs/VERIFICATION.md)。
+
+## 部署
+
+Cloudflare Pages 独立项目 `lucian-uxui-zh`：<https://lucian-uxui-zh.pages.dev/>。
+push 到 `main` 由 GitHub Actions 自动构建发布（`.github/workflows/deploy.yml`），说明见 [docs/DEPLOY.md](docs/DEPLOY.md)。
 
 ## 版权与署名
 

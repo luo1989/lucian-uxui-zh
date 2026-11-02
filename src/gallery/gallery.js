@@ -70,83 +70,83 @@
     '思考': ['思考', '推理', 'thinking', 'reason', 'ai'],
     '思考动画': ['思考', '推理', 'thinking'],
     '聊天': ['聊天', '对话', 'chat', 'message', '消息'],
-    '聊天输入框': ['聊天', '输入', 'chat', '输入框'],
-    '输入框': ['输入', 'input', '输入框', '文本框'],
+    '聊天输入框': ['聊天输入', '对话输入', 'chat input', '消息输入', '聊天框', '发消息', '聊天', '对话'],
+    '输入框': ['输入框', 'input', '文本框', '输入字段'],
     '卡片': ['卡片', 'card', '卡'],
     '侧边栏': ['侧边栏', '侧栏', 'sidebar', '抽屉', 'drawer'],
-    '底部弹窗': ['底部', '弹窗', '弹层', 'bottom sheet', 'sheet', 'drawer'],
-    '弹窗': ['弹窗', '弹层', 'dialog', 'modal', 'sheet', 'popover'],
-    '加载动画': ['加载', 'loading', '载入', '进度', 'spinner', '骨架'],
-    '加载': ['加载', 'loading', '载入', '进度', 'progress', 'spinner'],
+    '底部弹窗': ['底部弹层', 'bottom sheet', '底部抽屉', '底部面板', '底部菜单'],
+    '弹窗': ['弹窗', '弹层', 'dialog', 'modal', 'popover'],
+    '加载动画': ['加载动效', 'loading', '加载中', '载入动画', 'spinner', '骨架屏'],
+    '加载': ['加载', 'loading', '载入', 'spinner'],
     '液态玻璃': ['液态玻璃', '玻璃', 'liquid glass', 'glass', '毛玻璃'],
     '玻璃': ['玻璃', 'glass', '液态玻璃', '毛玻璃'],
-    '页面切换': ['页面切换', '切换', '过渡', 'transition', 'route', '导航'],
-    '切换': ['切换', 'toggle', 'switch', 'tab', '过渡'],
-    '动画': ['动画', '动效', 'motion', 'animation', '过渡'],
+    '页面切换': ['页面转场', '页面过渡', '转场', 'page transition', 'route transition', '视图切换'],
+    '切换': ['切换', 'toggle', 'switch', '选项卡'],
+    '动画': ['动画', '动效', 'motion', 'animation'],
     '动效': ['动效', '动画', 'motion', 'animation'],
     '按钮': ['按钮', 'button', 'btn'],
-    '表单': ['表单', 'form', '输入', '校验'],
-    '导航': ['导航', 'nav', 'navbar', '菜单', 'header'],
-    '菜单': ['菜单', 'menu', '下拉', 'dropdown', '导航'],
-    '表格': ['表格', 'table', '列表', 'list', '数据'],
-    '图表': ['图表', 'chart', '数据', '可视化', 'graph'],
+    '表单': ['表单', 'form', '校验'],
+    '导航': ['导航', 'nav', 'navbar', '导航栏'],
+    '菜单': ['菜单', 'menu', '下拉菜单', 'dropdown'],
+    '表格': ['表格', 'table', '数据表'],
+    '图表': ['图表', 'chart', '可视化', 'graph'],
     '滚动': ['滚动', 'scroll', '视差', 'parallax'],
     '悬停': ['悬停', 'hover', '光标', 'cursor'],
     '鼠标': ['鼠标', '光标', 'cursor', 'hover'],
     '深色模式': ['深色', '暗色', 'dark', '主题', 'theme'],
     '浅色模式': ['浅色', '亮色', 'light', '主题', 'theme'],
-    '主题': ['主题', 'theme', '深色', '浅色'],
+    '主题': ['主题', 'theme', '深色模式', '浅色模式'],
     '收藏': ['收藏', '喜欢', 'bookmark', 'favorite', '星标'],
     '登录': ['登录', 'sign in', 'signin', 'login', '认证'],
     '注册': ['注册', 'sign up', 'signup', 'register', '账号'],
-    '提示': ['提示', 'toast', '通知', 'tooltip', '反馈'],
+    '提示': ['提示', 'toast', 'tooltip', '轻提示'],
     '空状态': ['空状态', 'empty', '无数据', '空白'],
     '错误': ['错误', 'error', '失败', '异常'],
-    '进度': ['进度', 'progress', '加载', 'loading'],
+    '进度': ['进度', 'progress', '进度条'],
     '骨架屏': ['骨架屏', 'skeleton', '加载', '占位'],
-    '价格': ['价格', '定价', 'pricing', '套餐', '价格表'],
+    '价格': ['价格', '定价', 'pricing', '套餐'],
     '定价': ['定价', '价格', 'pricing', '套餐'],
-    '购物车': ['购物车', 'cart', '结算', '电商'],
+    '购物车': ['购物车', 'cart', '结算'],
     '首屏': ['首屏', 'hero', '横幅', 'banner'],
-    '文字动效': ['文字动效', '文字', 'text', 'typography', '标题'],
+    '文字动效': ['文字动效', '文字动画', 'text motion', '标题动画'],
     '光标': ['光标', '鼠标', 'cursor', '悬停'],
     '拖拽': ['拖拽', '拖动', 'drag', '拖放'],
-    '手势': ['手势', 'gesture', '滑动', 'swipe', '触控'],
-    '键盘': ['键盘', 'keyboard', '快捷键', '按键'],
-    '列表': ['列表', 'list', '表格', '条目'],
-    '搜索': ['搜索', 'search', '查找', '筛选'],
-    '筛选': ['筛选', 'filter', '过滤', '排序'],
-    '分页': ['分页', 'pagination', '翻页', '加载更多'],
-    '通知': ['通知', 'notification', '消息', '提示'],
-    '头像': ['头像', 'avatar', '用户'],
-    '徽章': ['徽章', 'badge', '标签', '角标'],
-    '标签': ['标签', 'tag', 'chip', '徽章'],
-    '日历': ['日历', 'calendar', '日期', '日程'],
-    '日期': ['日期', 'date', '日历', '时间'],
+    '手势': ['手势', 'gesture', '滑动', 'swipe'],
+    '键盘': ['键盘', 'keyboard', '快捷键'],
+    '列表': ['列表', 'list', '条目'],
+    '搜索': ['搜索', 'search', '查找'],
+    '筛选': ['筛选', 'filter', '过滤'],
+    '分页': ['分页', 'pagination', '翻页'],
+    '通知': ['通知', 'notification', '消息'],
+    '头像': ['头像', 'avatar'],
+    '徽章': ['徽章', 'badge', '角标'],
+    '标签': ['标签', 'tag', 'chip'],
+    '日历': ['日历', 'calendar', '日程'],
+    '日期': ['日期', 'date', '日历'],
     '时间': ['时间', 'time', '时钟', '计时'],
-    '上传': ['上传', 'upload', '文件', '拖放'],
+    '上传': ['上传', 'upload', '文件上传'],
     '下载': ['下载', 'download', '文件'],
-    '视频': ['视频', 'video', '播放', '媒体'],
-    '音乐': ['音乐', 'music', '音频', '播放器'],
+    '视频': ['视频', 'video', '播放器'],
+    '音乐': ['音乐', 'music', '音频'],
     '音乐播放器': ['音乐', '播放器', 'player', '音频'],
-    '仪表盘': ['仪表盘', 'dashboard', '数据', '面板'],
-    '仪表': ['仪表', 'gauge', '图表', '数据'],
+    '仪表盘': ['仪表盘', 'dashboard', '数据面板'],
+    '仪表': ['仪表', 'gauge', '图表'],
     '粒子': ['粒子', 'particle', '背景', '动效'],
     '渐变': ['渐变', 'gradient', '背景', '颜色'],
     '背景': ['背景', 'background', '渐变', '粒子'],
-    '文本': ['文本', '文字', 'text', '文案'],
-    '代码': ['代码', 'code', '编辑器', '语法'],
-    '编辑器': ['编辑器', 'editor', '代码', '文档'],
-    '看板': ['看板', 'kanban', '任务', '工作流'],
-    '任务': ['任务', 'task', '待办', 'todo', '工作流'],
-    '定价表': ['定价', '价格表', 'pricing', '套餐'],
-    '跑马灯': ['跑马灯', 'marquee', '滚动', 'logo'],
+    '文本': ['文本', '文字', 'text'],
+    '代码': ['代码', 'code', '语法高亮'],
+    '编辑器': ['编辑器', 'editor', '代码'],
+    '看板': ['看板', 'kanban', '任务板'],
+    '任务': ['任务', 'task', '待办', 'todo'],
+    '定价表': ['定价表', '价格表', 'pricing'],
+    '跑马灯': ['跑马灯', 'marquee', 'logo 滚动'],
     '视差': ['视差', 'parallax', '滚动'],
-    '吸顶': ['吸顶', 'sticky', '固定', '导航'],
-    '轮播': ['轮播', 'carousel', 'slider', '滑动'],
-    '抽屉': ['抽屉', 'drawer', '侧边栏', '侧栏'],
-    '气泡': ['气泡', 'tooltip', 'popover', '提示'],
-    '轻提示': ['轻提示', 'toast', '提示', '通知']
+    '吸顶': ['吸顶', 'sticky', '固定导航'],
+    '轮播': ['轮播', 'carousel', 'slider'],
+    '抽屉': ['抽屉', 'drawer', '侧边栏'],
+    '气泡': ['气泡', 'tooltip', 'popover'],
+    '轻提示': ['轻提示', 'toast', '通知']
   };
   var T = {
     ko: {
@@ -964,33 +964,49 @@
   ITEMS.map(function (_, i) { return i; }).sort(function (a, b) { return ((ITEMS[b].set || 1) - (ITEMS[a].set || 1)) || ((ITEMS[a].ci == null ? 99 : ITEMS[a].ci) - (ITEMS[b].ci == null ? 99 : ITEMS[b].ci)) || (a - b); }).forEach(function (i) { var c = ITEMS[i].category; if (CATS.indexOf(c) < 0) CATS.push(c); });
   var activeCat = '전체';
   var query = '';
-  // 搜索索引：四种语言（韩/英/中）的标题、说明、分类、标签、中文关键词都放进去，中英韩都能搜
+  // 搜索索引：标题 / 关键词(标签·分类·中文关键词) / 说明 三层，中英韩都能搜，评分按层给不同权重
   var HAY = ITEMS.map(function (it) {
     var en = it.en || {}, zh = it.zh || {};
-    return [
-      it.id, it.title, it.summary, it.category, CAT_EN[it.category] || '', CAT_ZH[it.category] || '',
-      it.tags.join(' '), en.title || '', en.summary || '',
-      zh.title || '', zh.summary || '', (zh.kw || []).join(' '), zh.hint || '',
-      it.set === 2 ? 'new 애니메이션 animation 动画 动效' : ''
-    ].join(' ').toLowerCase();
+    var title = [it.title, en.title || '', zh.title || ''].join(' ').toLowerCase();
+    var kw = [it.tags.join(' '), CAT_EN[it.category] || '', CAT_ZH[it.category] || '', (zh.kw || []).join(' ')].join(' ').toLowerCase();
+    var body = [it.summary, en.summary || '', zh.summary || '', zh.hint || '', it.category].join(' ').toLowerCase();
+    return {
+      t: title, k: kw, b: body,
+      all: (it.id + ' ' + title + ' ' + kw + ' ' + body + (it.set === 2 ? ' new 애니메이션 animation 动画 动效' : '')).toLowerCase()
+    };
   });
   var CJK = /[\u3400-\u9fff]/;
   function normQ(s) { return String(s).replace(/[\u3000\s]+/g, ' ').replace(/[，、]/g, ' ').replace(/^ +| +$/g, '').toLowerCase(); }
-  // 中文复合词拆成两字片段：如「思考动画」→ 思考 / 考动 / 动画，命中两个片段即视为相关
-  function bigrams(w) {
+  // 中文复合词按两字一段切分（不重叠）：如「聊天输入框」→ 聊天 / 输入，「思考动画」→ 思考 / 动画。
+  // 所有片段都出现才算相关，避免「输入框」这类泛词把无关结果带进来。
+  function chunks(w) {
     var out = [];
-    for (var i = 0; i + 2 <= w.length; i++) { var g = w.slice(i, i + 2); if (CJK.test(g)) out.push(g); }
+    for (var i = 0; i + 1 < w.length; i += 2) { var g = w.slice(i, i + 2); if (CJK.test(g)) out.push(g); }
     return out;
   }
-  // 返回匹配分：3=直接命中/同义词命中，2=中文片段命中，0=不匹配
-  function matchScore(w, hay) {
-    if (hay.indexOf(w) >= 0) return 3;
+  // 返回匹配分：6=标题命中，5=关键词/分类/标签命中，3=说明命中，1=中文片段兜底，0=不匹配
+  function matchScore(w, h) {
+    if (h.t.indexOf(w) >= 0) return 6;
+    if (h.k.indexOf(w) >= 0) return 5;
+    if (h.b.indexOf(w) >= 0) return 3;
     var alts = ZH_ALIAS[w];
-    if (alts) { for (var a = 0; a < alts.length; a++) if (hay.indexOf(String(alts[a]).toLowerCase()) >= 0) return 3; }
+    if (alts) {
+      var best = 0;
+      for (var a = 0; a < alts.length; a++) {
+        var t = String(alts[a]).toLowerCase();
+        if (h.t.indexOf(t) >= 0) best = Math.max(best, 6);
+        else if (h.k.indexOf(t) >= 0) best = Math.max(best, 5);
+        else if (h.b.indexOf(t) >= 0) best = Math.max(best, 3);
+      }
+      if (best) return best;
+    }
     if (CJK.test(w) && w.length >= 4) {
-      var gs = bigrams(w), hit = 0;
-      for (var g = 0; g < gs.length; g++) if (hay.indexOf(gs[g]) >= 0) hit++;
-      if (hit >= 2) return 2;
+      var cs = chunks(w);
+      if (cs.length >= 2) {
+        var hit = 0;
+        for (var g = 0; g < cs.length; g++) if (h.all.indexOf(cs[g]) >= 0) hit++;
+        if (hit === cs.length) return 1;
+      }
     }
     return 0;
   }
