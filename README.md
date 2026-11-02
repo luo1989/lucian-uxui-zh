@@ -1,5 +1,5 @@
 > **简体中文版 / Chinese edition**：本仓库是 [Seokwoooo/lucian-uxui-prompt](https://github.com/Seokwoooo/lucian-uxui-prompt)（MIT）的**中文本地化分支**，默认简体中文，保留英文 / 韩文切换，新增中文搜索与收藏。
-> 线上地址：<https://lucian-uxui-zh.pages.dev/> · 中文说明：[README.zh.md](README.zh.md) · 同步上游：[docs/SYNC-UPSTREAM.md](docs/SYNC-UPSTREAM.md)
+> 线上地址：<https://uxui.skyagentai.xyz/> · 中文说明：[README.zh.md](README.zh.md) · 同步上游：[docs/SYNC-UPSTREAM.md](docs/SYNC-UPSTREAM.md)
 
 [🇰🇷 한국어](README.ko.md) · [🇺🇸 English](README.md)
 

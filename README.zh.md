@@ -4,7 +4,7 @@
 > 每个组件都能现场试玩，然后作为 **AI 提示词** 或 **可运行代码** 带走。
 > 本仓库是基于 [Seokwoooo/lucian-uxui-prompt](https://github.com/Seokwoooo/lucian-uxui-prompt)（MIT）构建的**简体中文版**，默认中文，保留英文 / 韩文切换。
 
-**线上地址：<https://lucian-uxui-zh.pages.dev/>**
+**线上地址：<https://uxui.skyagentai.xyz/>**（Cloudflare Pages 默认域名：<https://lucian-uxui-zh.pages.dev/>）
 
 ---
 
@@ -83,7 +83,7 @@ npm test                     # 需要本机安装 Google Chrome；会跑桌面 +
 
 ## 部署
 
-Cloudflare Pages 独立项目 `lucian-uxui-zh`：<https://lucian-uxui-zh.pages.dev/>。
+Cloudflare Pages 独立项目 `lucian-uxui-zh`，自定义域名 **<https://uxui.skyagentai.xyz/>**（同账号 `skyagentai.xyz` 下的子域，不影响主站）；默认域名 <https://lucian-uxui-zh.pages.dev/> 同样可用。
 push 到 `main` 由 GitHub Actions 自动构建发布（`.github/workflows/deploy.yml`），说明见 [docs/DEPLOY.md](docs/DEPLOY.md)。
 
 ## 版权与署名

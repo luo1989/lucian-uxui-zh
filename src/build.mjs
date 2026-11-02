@@ -18,6 +18,8 @@ const galDir = join(here, 'gallery');
 const zhDir = join(here, 'i18n', 'zh', 'e');
 const siteAssets = join(here, 'site');
 const siteBuild = process.argv.includes('--site');
+// 站点主地址（canonical / og:url / sitemap / robots）；部署后可用 UX_SITE_URL 覆盖
+const siteUrl = (process.env.UX_SITE_URL || 'https://uxui.skyagentai.xyz').replace(/\/$/, '');
 const outDir = siteBuild ? join(here, '..', 'dist') : join(here, '..', 'prompt-uxui-lab');
 const outFile = join(outDir, 'index.html');
 
@@ -277,6 +279,7 @@ const page = galleryHtml
   .replace('/*@GALLERY_CSS@*/', () => galleryCss)
   .replace('/*@GALLERY_JS@*/', () => galleryJs)
   .replace('/*@TOKENS@*/', () => tokens)
+  .replace(/__SITE_URL__/g, () => siteUrl)
   .replace('__UX_DATA__', () => data);
 
 mkdirSync(outDir, { recursive: true });
@@ -291,9 +294,8 @@ if (siteBuild) {
   if (existsSync(siteAssets)) {
     for (const f of readdirSync(siteAssets)) copyFileSync(join(siteAssets, f), join(outDir, f));
   }
-  // 线上地址写进 robots/sitemap/页面（可用 UX_SITE_URL 覆盖）
-  const siteUrl = (process.env.UX_SITE_URL || 'https://lucian-uxui-zh.pages.dev').replace(/\/$/, '');
-  for (const f of ['robots.txt', 'sitemap.xml', 'index.html']) {
+  // robots.txt / sitemap.xml 里的站点地址
+  for (const f of ['robots.txt', 'sitemap.xml']) {
     const fp = join(outDir, f);
     if (existsSync(fp)) writeFileSync(fp, readFileSync(fp, 'utf8').replace(/__SITE_URL__/g, siteUrl));
   }

@@ -1,6 +1,6 @@
 # 验收记录
 
-- 线上地址：<https://lucian-uxui-zh.pages.dev/>
+- 线上地址：<https://uxui.skyagentai.xyz/>（默认域名 <https://lucian-uxui-zh.pages.dev/> 同样可用）
 - 验收时间：2026-11-02（Asia/Shanghai）
 - 构建：`ZH_STRICT=1 node src/build.mjs --site`（GitHub Actions 同一命令）
 - 浏览器：本机 Chrome（Playwright，桌面 1440×900 / 移动 390×844）
@@ -89,11 +89,12 @@
 |---|---|
 | Cloudflare Pages 项目 | `lucian-uxui-zh`（独立项目，未改动其他项目） |
 | 默认域名 | https://lucian-uxui-zh.pages.dev/ |
+| 自定义域名 | **https://uxui.skyagentai.xyz/**（CNAME → pages.dev，Proxied，TLS 由 Cloudflare 自动签发） |
 | 首次部署（wrangler 直传） | deployment `16950f15` |
 | 生产部署（最终） | `7fa61c31`（GitHub Actions） |
 | GitHub Actions 自动部署 | `.github/workflows/deploy.yml`，push `main` 触发，已验证 5 次成功（23–31 s） |
 | 密钥管理 | 使用仅含 `Pages:Read/Write` 权限的独立 API Token，存于 GitHub Secrets，未写入仓库 |
-| 自定义域名 | 未绑定（避免改动现有域名 DNS）；如需可后续在 Pages 控制台加子域 |
+| 自定义域名 | 已绑定 `uxui.skyagentai.xyz`，未改动主站 `skyagentai.xyz` / `www` 记录 |
 
 ## 6. 未验证 / 已知限制
 

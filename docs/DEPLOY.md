@@ -38,6 +38,22 @@ npx wrangler@4 pages deploy dist --project-name lucian-uxui-zh --branch main
 ```
 
 默认域名：`https://lucian-uxui-zh.pages.dev/`
+自定义域名：`https://uxui.skyagentai.xyz/`（同账号 `skyagentai.xyz` 下的子域，CNAME → `lucian-uxui-zh.pages.dev`，Proxied）
+
+绑定命令（API）：
+
+```sh
+# 1) 在 Pages 项目上添加域名
+curl -X POST "https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT_ID/pages/projects/lucian-uxui-zh/domains" \
+  -H "Authorization: Bearer $CF_API_TOKEN" -H "Content-Type: application/json" \
+  --data '{"name":"uxui.skyagentai.xyz"}'
+# 2) 若未自动创建，手动加 CNAME（Proxied）
+curl -X POST "https://api.cloudflare.com/client/v4/zones/<ZONE_ID>/dns_records" \
+  -H "Authorization: Bearer $CF_API_TOKEN" -H "Content-Type: application/json" \
+  --data '{"type":"CNAME","name":"uxui","content":"lucian-uxui-zh.pages.dev","proxied":true}'
+```
+
+> 注意：该 zone 开启了 Cloudflare 托管 robots.txt（AI Crawl Control），会在 `robots.txt` 前追加一段内容，属于 zone 级设置，与本站无关。
 
 ## GitHub 自动部署
 
@@ -52,10 +68,10 @@ npx wrangler@4 pages deploy dist --project-name lucian-uxui-zh --branch main
 
 之后每次 `git push origin main` 都会自动发布；也可以在 Actions 页面手动 `workflow_dispatch`。
 
-## 自定义域名（可选）
+## 自定义域名
 
-Pages 项目 → Custom domains → 添加子域名，按提示添加 CNAME。
-**不要**改动现有站点正在使用的根域 / 主域 DNS 记录。
+已绑定 `uxui.skyagentai.xyz`（见上）。换域名时：Pages 项目 → Custom domains → 添加，然后把 `UX_SITE_URL` 传给构建（`UX_SITE_URL=https://新域名 npm run site`），canonical / sitemap / robots 会一起更新。
+**不要**改动主站正在使用的根域 / 主域 DNS 记录。
 
 ## 回滚
 

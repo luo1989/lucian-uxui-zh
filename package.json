@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Lucian UX/UI Prompt 简体中文版：400 个可交互 UX/UI 组件与中文 AI 提示词（基于上游 MIT 项目构建）",
   "license": "MIT",
-  "homepage": "https://lucian-uxui-zh.pages.dev/",
+  "homepage": "https://uxui.skyagentai.xyz/",
   "repository": {
     "type": "git",
     "url": "https://github.com/luo1989/lucian-uxui-zh.git"
