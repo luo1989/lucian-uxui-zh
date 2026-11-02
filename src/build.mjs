@@ -291,12 +291,12 @@ if (siteBuild) {
   if (existsSync(siteAssets)) {
     for (const f of readdirSync(siteAssets)) copyFileSync(join(siteAssets, f), join(outDir, f));
   }
-  // 线上地址写进 sitemap/canonical（部署后可用 UX_SITE_URL 覆盖）
+  // 线上地址写进 robots/sitemap/页面（可用 UX_SITE_URL 覆盖）
   const siteUrl = (process.env.UX_SITE_URL || 'https://lucian-uxui-zh.pages.dev').replace(/\/$/, '');
-  const sitemap = join(outDir, 'sitemap.xml');
-  if (existsSync(sitemap)) writeFileSync(sitemap, readFileSync(sitemap, 'utf8').replace(/__SITE_URL__/g, siteUrl));
-  const idx = readFileSync(outFile, 'utf8').replace(/__SITE_URL__/g, siteUrl);
-  writeFileSync(outFile, idx);
+  for (const f of ['robots.txt', 'sitemap.xml', 'index.html']) {
+    const fp = join(outDir, f);
+    if (existsSync(fp)) writeFileSync(fp, readFileSync(fp, 'utf8').replace(/__SITE_URL__/g, siteUrl));
+  }
   const files = readdirSync(outDir);
   const sizes = files.map((f) => [f, Buffer.byteLength(readFileSync(join(outDir, f)))]);
   sizes.sort((a, b) => b[1] - a[1]);
