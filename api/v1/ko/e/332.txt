@@ -1,0 +1,74 @@
+<!-- Lucian UX/UI Prompt #332 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#332 -->
+<!--
+Element: 작아지며 붙는 큰 제목
+ID: 332 · Category: 내비게이션 · Tags: scroll, header, navigation, large-title, mobile
+What it does: 목록을 올리면 큰 제목이 위로 밀려 올라가며 상단 막대 가운데의 작은 제목으로 바뀌고, 검색창은 눌리듯 줄어들며 사라집니다. 막대는 그 순간부터 반투명 유리와 아랫선을 갖습니다. 맨 위에서 더 당기면 큰 제목이 고무줄처럼 살짝 커집니다.
+How to use it: 목록을 위아래로 스크롤해 보세요
+Footprint: fixed size, tall
+Needs: tokens.css (the --ux-* theme tokens and the .ux base). Map the tokens to the project's theme variables.
+Live demo: https://lucianlabs.dev/uxui-prompt/#332
+-->
+<style>
+.u332{position:relative;width:300px;height:500px;border-radius:36px;background:var(--ux-surface);box-shadow:0 0 0 1px var(--ux-line),0 30px 60px -36px var(--ux-shadow-strong);overflow:hidden}
+.u332-bar{position:absolute;left:0;right:0;top:0;z-index:2;height:54px;display:flex;align-items:center;justify-content:center;transition:background-color .25s,box-shadow .25s}
+.u332.is-stuck .u332-bar{background:color-mix(in srgb,var(--ux-surface) 78%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--ux-line)}
+.u332-st{font-size:15.5px;font-weight:800;opacity:var(--so,0);transform:translateY(calc((1 - var(--so,0)) * 8px))}
+.u332-ed{position:absolute;right:18px;top:17px;border:0;background:none;padding:0;font-size:14.5px;font-weight:650;color:var(--ux-accent)}
+.u332-sc{position:absolute;inset:0;overflow-y:auto;padding-top:54px;scrollbar-width:none;outline:none}
+.u332-sc::-webkit-scrollbar{display:none}
+.u332-lt{margin:0;padding:0 18px;font-size:32px;font-weight:880;letter-spacing:-.04em;transform-origin:0 100%;transform:scale(var(--ls,1));opacity:var(--lo,1)}
+.u332-sw{height:var(--sh,46px);margin:0 16px;overflow:hidden}
+.u332-se{display:flex;align-items:center;gap:8px;height:38px;margin-top:8px;padding:0 12px;border-radius:12px;background:var(--ux-surface-2);opacity:var(--sop,1);transform:scaleY(var(--ssy,1));transform-origin:50% 0}
+.u332-se svg{width:16px;height:16px;fill:none;stroke:var(--ux-ink-3);stroke-width:2;stroke-linecap:round}
+.u332-se input{flex:1;min-width:0;border:0;background:none;outline:none;font-size:14.5px;color:var(--ux-ink)}
+.u332-ul{margin:8px 0 0;padding:0 0 30px;list-style:none}
+.u332-li{display:flex;gap:12px;padding:12px 18px;border-bottom:1px solid var(--ux-line)}
+.u332-li i{flex:none;width:9px;height:9px;margin-top:6px;border-radius:50%;background:var(--ux-accent)}
+.u332-li:nth-child(n+4) i{background:transparent}
+.u332-li div{flex:1;min-width:0}
+.u332-li b{display:flex;justify-content:space-between;font-size:14px;font-weight:800}
+.u332-li b span{font-size:11.5px;font-weight:650;color:var(--ux-ink-3)}
+.u332-li p{margin:2px 0 0;font-size:13px;color:var(--ux-ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style>
+<div class="ux u332">
+  <div class="u332-bar"><span class="u332-st" aria-hidden="true">받은편지함</span><button class="u332-ed" type="button">편집</button></div>
+  <div class="u332-sc" tabindex="0" aria-label="받은편지함 목록">
+    <h3 class="u332-lt">받은편지함</h3>
+    <div class="u332-sw"><label class="u332-se"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg><input type="search" placeholder="메일 검색" aria-label="메일 검색"></label></div>
+    <ul class="u332-ul"></ul>
+  </div>
+</div>
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  var sc = root.querySelector('.u332-sc'), ul = root.querySelector('.u332-ul');
+  var MAIL = [['디자인팀', '금요일 리뷰 자료 공유드려요', '오전 9:12'], ['은행 알림', '이번 달 카드 사용 내역', '오전 8:40'], ['지윤', '주말에 시간 괜찮아?', '어제'], ['서점', '주문하신 책이 출발했어요', '어제'], ['민호', '회의록 정리했어', '화요일'], ['요가 스튜디오', '다음 주 수업 시간표', '화요일'], ['수아', '사진 보내 줄게!', '월요일'], ['항공사', '탑승권이 준비되었습니다', '월요일'], ['뉴스레터', '이번 주 읽을거리 5가지', '일요일']];
+  MAIL.forEach(function (m) {
+    var li = document.createElement('li');
+    li.className = 'u332-li';
+    li.innerHTML = '<i aria-hidden="true"></i><div><b><em></em><span></span></b><p></p></div>';
+    li.querySelector('em').textContent = m[0]; li.querySelector('em').style.fontStyle = 'normal';
+    li.querySelector('b span').textContent = m[2];
+    li.querySelector('p').textContent = m[1];
+    ul.appendChild(li);
+  });
+  var raf = 0;
+  // 0~46px: 검색창이 눌리듯 접히고, 그동안 큰 제목이 막대 밑으로 들어가 사라진 뒤 작은 제목이 나타납니다
+  function draw() {
+    raf = 0;
+    var y = sc.scrollTop;
+    var s = Math.max(0, Math.min(1, y / 46));
+    root.style.setProperty('--sh', (46 * (1 - s)).toFixed(1) + 'px');
+    root.style.setProperty('--sop', (1 - s * 1.6).toFixed(2));
+    root.style.setProperty('--ssy', (1 - s * 0.5).toFixed(2));
+    // 큰 제목이 막대 밑으로 들어가며 완전히 사라진 뒤에야 작은 제목이 나타나, 두 제목이 겹쳐 보이지 않습니다
+    var t = Math.max(0, Math.min(1, (y - 2) / 22));
+    root.style.setProperty('--lo', (1 - t).toFixed(2));
+    root.style.setProperty('--so', Math.max(0, Math.min(1, (y - 26) / 18)).toFixed(2));
+    root.style.setProperty('--ls', y < 0 ? (1 + Math.min(0.12, -y / 400)).toFixed(3) : (1 - Math.min(0.08, y / 300)).toFixed(3));
+    root.classList.toggle('is-stuck', y > 20);
+  }
+  sc.addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(draw); }, { passive: true });
+  draw();
+})();
+</script>

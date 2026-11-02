@@ -1,0 +1,47 @@
+{
+ "id": "162",
+ "title": "变量相关矩阵",
+ "summary": "用颜色表示四个变量之间相关系数的矩阵。点按格子会在下方显示这组变量和系数，再按一次就取消选择。",
+ "hint": "点一下矩阵里的格子试试",
+ "kw": [
+  "相关系数",
+  "相关矩阵",
+  "热力图",
+  "变量关系",
+  "数据分析",
+  "矩阵图",
+  "统计学",
+  "指标关联"
+ ],
+ "map": [
+  [
+   "변수 간 상관 계수",
+   "变量间相关系数"
+  ],
+  [
+   "가격",
+   "价格"
+  ],
+  [
+   "사용",
+   "使用"
+  ],
+  [
+   "만족",
+   "满意"
+  ],
+  [
+   "이탈",
+   "流失"
+  ],
+  [
+   "<button data-r=\"${r}\" data-c=\"${c}\" style=\"--col:${r===c?'var(--ux-surface-3)':Math.abs(v)>.5?(v<0?'#865B49':'#426F90'):'var(--ux-surface)'};--txt:${r!==c&&Math.abs(v)>.5?'white':'var(--ux-ink)'}\" aria-label=\"${labels[r]}와 ${labels[c]} 상관 ${v}\">${v.toFixed(2)}</button>",
+   "<button data-r=\"${r}\" data-c=\"${c}\" style=\"--col:${r===c?'var(--ux-surface-3)':Math.abs(v)>.5?(v<0?'#865B49':'#426F90'):'var(--ux-surface)'};--txt:${r!==c&&Math.abs(v)>.5?'white':'var(--ux-ink)'}\" aria-label=\"${labels[r]} 与 ${labels[c]} 相关系数 ${v}\">${v.toFixed(2)}</button>"
+  ],
+  [
+   "상관 계수 r",
+   "相关系数 r"
+  ]
+ ],
+ "demo": {}
+}

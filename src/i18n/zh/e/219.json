@@ -1,0 +1,39 @@
+{
+ "id": "219",
+ "title": "从点击处圆形扩散的深色模式",
+ "summary": "点站点页头的太阳图标，深色画面会从按钮位置以圆形扩散铺满整页，图标同时从太阳转成月亮。再点一次，浅色画面从同一处圆形扩散回来。两套主题的文字、卡片和图表颜色会一起切换。",
+ "hint": "点右上角的太阳/月亮按钮切换主题",
+ "kw": [
+  "深色模式",
+  "主题切换",
+  "圆形扩散",
+  "明暗",
+  "太阳月亮",
+  "动画",
+  "页头",
+  "配色"
+ ],
+ "map": [
+  [
+   "<div class=\"u219-nv\"><b><i></i>Pulse</b><span>대시보드</span><span>보고서</span><button type=\"button\" class=\"u219-tg\">",
+   "<div class=\"u219-nv\"><b><i></i>Pulse</b><span>仪表板</span><span>报告</span><button type=\"button\" class=\"u219-tg\">"
+  ],
+  [
+   "<h3 class=\"u219-h\">10월 요약</h3><div class=\"u219-kp\"><div><small>방문</small><b>18.4k</b></div><div><small>가입</small><b>1,206</b></div><div><small>전환</small><b>6.5%</b></div></div>",
+   "<h3 class=\"u219-h\">10 月概览</h3><div class=\"u219-kp\"><div><small>访问</small><b>18.4k</b></div><div><small>注册</small><b>1,206</b></div><div><small>转化</small><b>6.5%</b></div></div>"
+  ],
+  [
+   "<div class=\"u219-ch\"><small>주간 방문 추이</small><svg viewBox=\"0 0 280 112\" preserveAspectRatio=\"none\"><defs><linearGradient id=\"g\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"var(--ac)\" stop-opacity=\".35\"/><stop offset=\"1\" stop-color=\"var(--ac)\" stop-opacity=\"0\"/></linearGradient></defs><path d=\"M0 84 C30 70 50 92 80 66 S130 40 160 54 S220 20 280 26 L280 112 L0 112 Z\" fill=\"url(#g)\"/><path d=\"M0 84 C30 70 50 92 80 66 S130 40 160 54 S220 20 280 26\" fill=\"none\" stroke=\"var(--ac)\" stroke-width=\"2.5\"/></svg></div>",
+   "<div class=\"u219-ch\"><small>每周访问趋势</small><svg viewBox=\"0 0 280 112\" preserveAspectRatio=\"none\"><defs><linearGradient id=\"g\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"var(--ac)\" stop-opacity=\".35\"/><stop offset=\"1\" stop-color=\"var(--ac)\" stop-opacity=\"0\"/></linearGradient></defs><path d=\"M0 84 C30 70 50 92 80 66 S130 40 160 54 S220 20 280 26 L280 112 L0 112 Z\" fill=\"url(#g)\"/><path d=\"M0 84 C30 70 50 92 80 66 S130 40 160 54 S220 20 280 26\" fill=\"none\" stroke=\"var(--ac)\" stroke-width=\"2.5\"/></svg></div>"
+  ],
+  [
+   "라이트 모드로 바꾸기",
+   "切换到浅色模式"
+  ],
+  [
+   "다크 모드로 바꾸기",
+   "切换到深色模式"
+  ]
+ ],
+ "demo": {}
+}

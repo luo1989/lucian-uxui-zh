@@ -1,0 +1,92 @@
+<!-- @meta {"title":"스크롤 따라 넘어가는 카테고리 칩 바","category":"내비게이션","summary":"배달 앱 메뉴판처럼 위에 카테고리 칩 줄이 붙어 있고, 아래 메뉴를 스크롤하면 지금 보고 있는 구역의 칩으로 밑줄이 미끄러지며 칩 줄도 그 칩이 보이도록 옆으로 저절로 밀립니다. 칩을 누르면 그 구역 머리까지 부드럽게 내려가고, 위로 많이 올라가면 칩 줄 그림자가 사라지며 큰 가게 정보가 다시 보입니다.","hint":"메뉴를 아래로 스크롤해 보고, 위쪽 칩도 눌러 보세요","shape":"tall","tags":["scrollspy","tabs","sticky","menu","food-delivery"]} -->
+<!-- @demo [["wait",900],["scroll",".u242-sc",0,360,1600],["wait",700],["scroll",".u242-sc",0,420,1500],["wait",700],["tap",".u242-ch",1,{"after":1300}],["tap",".u242-ch",4,{"after":1400}],["scroll",".u242-sc",0,"top",1200]] -->
+<!-- @en {"title":"Category chip bar that follows scroll","summary":"Like a delivery app's menu, a row of category chips sticks to the top; scroll the menu below and the underline slides to the chip for the section you're in, while the chip row nudges itself sideways to keep that chip in view. Press a chip to glide down to that section's heading, and scroll back to the top to lose the chip bar's shadow and see the big store header again.","hint":"Scroll down through the menu, then try the chips at the top","map":[
+  [">동네 샐러드 가게<", ">Neighborhood Salad Bar<"],
+  [">★ 4.9 · 배달 20–30분 · 최소 주문 12,000원<", ">★ 4.9 · Delivery 20–30 min · $12 minimum<"],
+  ["var SEC = [['추천', [['연어 포케', '14,900원'], ['닭가슴살 샐러드', '11,900원']]], ['샐러드', [['시저 샐러드', '10,900원'], ['콥 샐러드', '12,500원'], ['그릭 샐러드', '11,500원']]], ['포케', [['참치 포케', '15,900원'], ['두부 포케', '12,900원']]], ['랩·샌드위치', [['치킨 랩', '9,900원'], ['아보카도 샌드위치', '10,500원']]], ['음료', [['레몬 에이드', '4,500원'], ['콤부차', '5,000원']]], ['디저트', [['그릭 요거트', '4,900원'], ['오트 쿠키', '2,500원']]]]", "var SEC = [['Popular', [['Salmon poke', '$14.90'], ['Chicken salad', '$11.90']]], ['Salads', [['Caesar salad', '$10.90'], ['Cobb salad', '$12.50'], ['Greek salad', '$11.50']]], ['Poke', [['Tuna poke', '$15.90'], ['Tofu poke', '$12.90']]], ['Wraps', [['Chicken wrap', '$9.90'], ['Avocado sandwich', '$10.50']]], ['Drinks', [['Lemonade', '$4.50'], ['Kombucha', '$5.00']]], ['Desserts', [['Greek yogurt', '$4.90'], ['Oat cookie', '$2.50']]]]"],
+  ["aria-label=\"메뉴 카테고리\"", "aria-label=\"Menu categories\""],
+  ["aria-label=\"메뉴\"", "aria-label=\"Menu\""]
+]} -->
+<style>
+.u242{position:relative;width:300px;height:480px;border-radius:32px;overflow:hidden;background:var(--ux-surface);box-shadow:0 0 0 1px var(--ux-line),0 30px 60px -36px var(--ux-shadow-strong);color:var(--ux-ink)}
+.u242-sc{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
+.u242-sc::-webkit-scrollbar{display:none}
+.u242-sc:focus-visible{outline:2px solid var(--ux-accent);outline-offset:-4px;border-radius:32px}
+.u242-hr{height:150px;background:linear-gradient(150deg,#86EFAC,#22C55E);position:relative}
+.u242-hr::after{content:"";position:absolute;left:50%;top:44%;width:96px;height:56px;margin-left:-48px;border-radius:0 0 48px 48px;background:#FEFCE8;box-shadow:inset 0 -10px 0 #FDE68A}
+.u242-if{padding:14px 18px 10px}
+.u242-if h3{margin:0;font-size:18px;font-weight:900;letter-spacing:-.03em}
+.u242-if p{margin:4px 0 0;font-size:10.5px;font-weight:700;color:var(--ux-ink-3)}
+.u242-cb{position:sticky;top:0;z-index:2;background:var(--ux-surface);transition:box-shadow .25s}
+.u242-cb.is-stuck{box-shadow:0 8px 16px -12px var(--ux-shadow-strong)}
+.u242-cr{position:relative;display:flex;gap:4px;padding:8px 14px 9px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--ux-line)}
+.u242-cr::-webkit-scrollbar{display:none}
+.u242-ch{flex:none;height:32px;padding:0 12px;border:0;border-radius:999px;background:none;color:var(--ux-ink-3);font:inherit;font-size:12px;font-weight:850;cursor:pointer;white-space:nowrap;transition:color .2s}
+.u242-ch[aria-current="true"]{color:var(--ux-ink)}
+.u242-ch:focus-visible{outline:2px solid var(--ux-accent);outline-offset:-2px}
+.u242-ul{position:absolute;left:0;bottom:6px;height:32px;border-radius:999px;background:var(--ux-surface-2);box-shadow:inset 0 0 0 1px var(--ux-line);transition:transform .35s cubic-bezier(.3,1.2,.5,1),width .35s cubic-bezier(.3,1.2,.5,1);z-index:-1}
+.u242-cr>.u242-ch{position:relative;z-index:1}
+.u242-sx{padding:14px 18px 4px}
+.u242-sx h4{margin:0 0 6px;font-size:14px;font-weight:900}
+.u242-it{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--ux-line)}
+.u242-it div{flex:1;min-width:0}
+.u242-it b{display:block;font-size:12.5px;font-weight:800}
+.u242-it span{display:block;margin-top:2px;font-size:11.5px;font-weight:850;color:var(--ux-ink-2);font-variant-numeric:tabular-nums}
+.u242-it i{flex:none;width:58px;height:58px;border-radius:14px}
+.u242-end{height:160px}
+@media (prefers-reduced-motion: reduce){.u242-ul,.u242-cb{transition:none}}
+</style>
+<div class="ux u242">
+  <div class="u242-sc" tabindex="0" aria-label="메뉴">
+    <div class="u242-hr" aria-hidden="true"></div>
+    <div class="u242-if"><h3>동네 샐러드 가게</h3><p>★ 4.9 · 배달 20–30분 · 최소 주문 12,000원</p></div>
+    <div class="u242-cb"><nav class="u242-cr" aria-label="메뉴 카테고리"><span class="u242-ul" aria-hidden="true"></span></nav></div>
+    <div class="u242-bd"></div><div class="u242-end" aria-hidden="true"></div>
+  </div>
+</div>
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  var sc = root.querySelector('.u242-sc'), cb = root.querySelector('.u242-cb'), cr = root.querySelector('.u242-cr'), ul = root.querySelector('.u242-ul'), bd = root.querySelector('.u242-bd');
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var SEC = [['추천', [['연어 포케', '14,900원'], ['닭가슴살 샐러드', '11,900원']]], ['샐러드', [['시저 샐러드', '10,900원'], ['콥 샐러드', '12,500원'], ['그릭 샐러드', '11,500원']]], ['포케', [['참치 포케', '15,900원'], ['두부 포케', '12,900원']]], ['랩·샌드위치', [['치킨 랩', '9,900원'], ['아보카도 샌드위치', '10,500원']]], ['음료', [['레몬 에이드', '4,500원'], ['콤부차', '5,000원']]], ['디저트', [['그릭 요거트', '4,900원'], ['오트 쿠키', '2,500원']]]];
+  var COL = ['#FDBA74', '#86EFAC', '#FCA5A5', '#FDE68A', '#93C5FD', '#F9A8D4'];
+  var uid = 'u242' + Math.random().toString(36).slice(2, 7);
+  var S = [], C = [];
+  SEC.forEach(function (s, i) {
+    var sx = document.createElement('section'); sx.className = 'u242-sx'; sx.id = uid + i; sx.innerHTML = '<h4></h4>'; sx.firstChild.textContent = s[0];
+    s[1].forEach(function (m, k) { var it = document.createElement('div'); it.className = 'u242-it'; it.innerHTML = '<div><b></b><span></span></div><i style="background:linear-gradient(135deg,' + COL[i] + ',color-mix(in srgb,' + COL[i] + ' 60%,#fff))"></i>'; it.querySelector('b').textContent = m[0]; it.querySelector('span').textContent = m[1]; sx.appendChild(it); });
+    bd.appendChild(sx); S.push(sx);
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'u242-ch'; b.textContent = s[0]; b.setAttribute('aria-controls', sx.id);
+    b.addEventListener('click', function () { go(i); });
+    cr.appendChild(b); C.push(b);
+  });
+  var cur = -1, lock = 0;
+  // 밑줄 알약을 지금 칩으로 옮기고, 칩 줄을 그 칩이 가운데쯤 오도록 밀어 줍니다
+  function mark(i) {
+    if (i === cur) return; cur = i;
+    C.forEach(function (b, k) { b.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+    var b = C[i]; ul.style.width = b.offsetWidth + 'px'; ul.style.transform = 'translateX(' + b.offsetLeft + 'px)';
+    var x = b.offsetLeft - (cr.clientWidth - b.offsetWidth) / 2, x0 = cr.scrollLeft, t0 = performance.now();
+    x = Math.max(0, Math.min(cr.scrollWidth - cr.clientWidth, x));
+    (function f(now) { var k = rm ? 1 : Math.min(1, (now - t0) / 320), e = 1 - Math.pow(1 - k, 3); cr.scrollLeft = x0 + (x - x0) * e; if (k < 1) requestAnimationFrame(f); })(t0);
+  }
+  function barH() { return cb.offsetHeight; }
+  // 스크롤 위치에서 지금 구역을 찾습니다 (칩 줄 아래 화면 위쪽 3분의 1 선을 기준으로, 맨 끝에 닿으면 마지막 구역)
+  function spy() {
+    cb.classList.toggle('is-stuck', cb.offsetTop - sc.scrollTop <= 0.5);
+    if (Date.now() < lock) return;
+    var y = sc.scrollTop + barH() + (sc.clientHeight - barH()) * 0.3, i = 0;
+    S.forEach(function (s, k) { if (s.offsetTop <= y) i = k; });
+    if (sc.scrollTop >= sc.scrollHeight - sc.clientHeight - 2) i = S.length - 1;
+    mark(i);
+  }
+  function go(i) {
+    mark(i); lock = Date.now() + (rm ? 0 : 700);
+    var to = S[i].offsetTop - barH() + 2, y0 = sc.scrollTop, t0 = performance.now();
+    (function f(now) { var k = rm ? 1 : Math.min(1, (now - t0) / 600), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; sc.scrollTop = y0 + (to - y0) * e; if (k < 1) requestAnimationFrame(f); })(t0);
+  }
+  sc.addEventListener('scroll', spy, { passive: true });
+  mark(0); requestAnimationFrame(function () { cur = -1; mark(0); spy(); });
+})();
+</script>

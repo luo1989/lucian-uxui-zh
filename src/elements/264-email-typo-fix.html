@@ -1,0 +1,95 @@
+<!-- @meta {"title":"이메일 오타를 짚어 주는 입력","category":"폼·입력","summary":"가입 폼의 이메일 칸에 @를 치면 자주 쓰는 메일 주소 끝자리가 칩으로 펼쳐지고, 누르면 그대로 채워집니다. gmial.com처럼 흔한 오타로 끝내면 아래에 ‘혹시 gmail.com인가요?’ 제안이 내려오며 틀린 부분이 표시되고, 누르면 글자가 바로잡히며 칸 오른쪽에 체크가 그려집니다.","hint":"이메일을 gmial.com으로 잘못 써 본 뒤 아래 제안을 눌러 보세요","shape":"square","tags":["email","typo","validation","autocomplete","signup"]} -->
+<!-- @demo [["wait",700],["tap",".u264-in",0,{"after":200}],["type",".u264-in",0,"minji@",90],["wait",900],["type",".u264-in",0,"gmial.com",80],["wait",1100],["tap",".u264-fx",0,{"after":1800}],["erase",".u264-in",0,"all",25],["type",".u264-in",0,"doyun@",80],["tap",".u264-dm",1,{"after":1500}],["reset"]] -->
+<!-- @en {"title":"Email input that catches typos","summary":"Type @ in a sign-up form's email field and common email domains fan out as chips that fill in when pressed. End with a common typo such as gmial.com and a “Did you mean gmail.com?” suggestion drops down with the mistake marked; press it and the letters fix themselves as a check draws on the right of the field.","hint":"Misspell the email as gmial.com, then press the suggestion below","map":[
+  [">계정 만들기<", ">Create account<"],
+  [">이메일<", ">Email<"],
+  ["aria-label=\"이메일\"", "aria-label=\"Email\""],
+  [">혹시 <", ">Did you mean <"],
+  [">인가요?<", ">?<"],
+  [">로그인 링크를 보내 드릴게요<", ">We’ll send you a sign-in link<"],
+  [">계속하기<", ">Continue<"],
+  ["aria-label=\"추천 도메인\"", "aria-label=\"Suggested domains\""]
+]} -->
+<style>
+.u264{position:relative;width:340px;height:340px;border-radius:30px;overflow:hidden;background:var(--ux-surface);box-shadow:0 0 0 1px var(--ux-line),0 30px 60px -36px var(--ux-shadow-strong);color:var(--ux-ink)}
+.u264-in-w{position:absolute;left:22px;right:22px;top:30px}
+.u264 h3{margin:0;font-size:20px;font-weight:900;letter-spacing:-.035em}
+.u264 label{display:block;margin-top:22px;font-size:11px;font-weight:800;color:var(--ux-ink-2)}
+.u264-fd{position:relative;margin-top:6px}
+.u264-in{width:100%;height:46px;padding:0 40px 0 14px;border:0;border-radius:13px;background:var(--ux-surface-2);box-shadow:inset 0 0 0 1.5px var(--ux-line);color:var(--ux-ink);font:inherit;font-size:13.5px;font-weight:700;outline:none;box-sizing:border-box;transition:box-shadow .2s}
+.u264-in:focus{box-shadow:inset 0 0 0 2px var(--ux-accent)}
+.u264.is-ok .u264-in{box-shadow:inset 0 0 0 2px #10B981}
+.u264-ck{position:absolute;right:12px;top:13px;width:20px;height:20px}
+.u264-ck circle{fill:#10B981;transform:scale(0);transform-origin:center;transform-box:fill-box;transition:transform .35s cubic-bezier(.3,1.7,.5,1)}
+.u264-ck path{fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:14;stroke-dashoffset:14;transition:stroke-dashoffset .3s ease .2s}
+.u264.is-ok .u264-ck circle{transform:none}
+.u264.is-ok .u264-ck path{stroke-dashoffset:0}
+.u264-dms{display:flex;gap:5px;flex-wrap:wrap;height:0;overflow:hidden;opacity:0;transition:height .3s cubic-bezier(.3,1,.4,1),opacity .2s,margin .3s}
+.u264.is-at .u264-dms{height:30px;opacity:1;margin-top:8px}
+.u264-dm{height:28px;padding:0 10px;border:0;border-radius:999px;background:var(--ux-surface-2);box-shadow:inset 0 0 0 1px var(--ux-line);color:var(--ux-ink-2);font:inherit;font-size:11px;font-weight:800;cursor:pointer;transform:translateY(-6px);opacity:0;transition:transform .35s cubic-bezier(.3,1.5,.5,1),opacity .2s,background .2s}
+.u264.is-at .u264-dm{transform:none;opacity:1}
+.u264-dm:hover,.u264-dm.g-hov{background:var(--ux-accent-soft);color:var(--ux-accent)}
+.u264-fx{display:flex;align-items:center;gap:7px;width:100%;margin-top:8px;padding:10px 12px;border:0;border-radius:12px;background:color-mix(in srgb,#F59E0B 13%,transparent);color:var(--ux-ink);font:inherit;font-size:12px;font-weight:700;text-align:left;cursor:pointer;transform-origin:50% 0;transform:translateY(-8px) scaleY(.6);opacity:0;pointer-events:none;transition:transform .35s cubic-bezier(.3,1.4,.5,1),opacity .2s}
+.u264.is-typo .u264-fx{transform:none;opacity:1;pointer-events:auto}
+.u264-fx svg{flex:none;width:16px;height:16px;color:#D97706}
+.u264-fx b{font-weight:850}
+.u264-fx mark{background:none;color:#D97706;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.u264-ft{position:absolute;left:22px;right:22px;bottom:24px}
+.u264-ft small{display:block;margin-bottom:8px;font-size:10.5px;font-weight:650;color:var(--ux-ink-3);text-align:center}
+.u264-go{width:100%;height:46px;border:0;border-radius:13px;background:var(--ux-ink);color:var(--ux-surface);font:inherit;font-size:13px;font-weight:850;transition:opacity .25s}
+.u264-go:disabled{opacity:.3}
+.u264-in.is-fix{animation:u264-fx .5s ease}
+@keyframes u264-fx{30%{background:color-mix(in srgb,#10B981 16%,transparent)}}
+.u264 button:focus-visible{outline:2px solid var(--ux-accent);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){.u264-dms,.u264-dm,.u264-fx,.u264-ck circle,.u264-ck path{transition:none}.u264-in.is-fix{animation:none}}
+</style>
+<div class="ux u264">
+  <div class="u264-in-w">
+    <h3>계정 만들기</h3>
+    <label>이메일</label>
+    <div class="u264-fd"><input class="u264-in" type="email" aria-label="이메일" autocomplete="off" spellcheck="false" placeholder="you@example.com"><svg class="u264-ck" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M6 10.3l2.6 2.6L14 7.5"/></svg></div>
+    <div class="u264-dms" role="group" aria-label="추천 도메인"></div>
+    <button type="button" class="u264-fx" tabindex="-1"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5L15 14H1z" fill="currentColor"/><path d="M8 6v3.5M8 11.6v.4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg><span>혹시 <b class="u264-sg"></b>인가요?</span></button>
+  </div>
+  <div class="u264-ft"><small>로그인 링크를 보내 드릴게요</small><button type="button" class="u264-go" disabled>계속하기</button></div>
+</div>
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  var inp = root.querySelector('.u264-in'), dms = root.querySelector('.u264-dms'), fx = root.querySelector('.u264-fx'), sg = root.querySelector('.u264-sg'), go = root.querySelector('.u264-go');
+  var DOM = ['gmail.com', 'naver.com', 'kakao.com', 'icloud.com', 'outlook.com', 'hanmail.net', 'daum.net', 'yahoo.com', 'hotmail.com'];
+  DOM.slice(0, 4).forEach(function (d) { var b = document.createElement('button'); b.type = 'button'; b.className = 'u264-dm'; b.textContent = '@' + d; b.addEventListener('click', function () { inp.value = inp.value.split('@')[0] + '@' + d; inp.focus({ preventScroll: true }); check(); }); dms.appendChild(b); });
+  Array.prototype.forEach.call(dms.children, function (b, i) { b.style.transitionDelay = i * 0.04 + 's'; });
+  // 두 글자 사이 편집 거리 (뒤바뀐 이웃 글자는 한 번으로 셉니다)
+  function dist(a, b) {
+    var d = [], i, j;
+    for (i = 0; i <= a.length; i++) { d[i] = [i]; }
+    for (j = 0; j <= b.length; j++) d[0][j] = j;
+    for (i = 1; i <= a.length; i++) for (j = 1; j <= b.length; j++) {
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+    }
+    return d[a.length][b.length];
+  }
+  var fixTo = '';
+  function check() {
+    var v = inp.value.trim(), at = v.indexOf('@'), dom = at >= 0 ? v.slice(at + 1).toLowerCase() : '';
+    root.classList.toggle('is-at', at > 0 && !dom);
+    var best = null;
+    if (/\.[a-z]{2,}$/.test(dom) && DOM.indexOf(dom) < 0) DOM.forEach(function (d) { var k = dist(dom, d); if (k <= 2 && (!best || k < best[1])) best = [d, k]; });
+    fixTo = best ? v.slice(0, at + 1) + best[0] : '';
+    root.classList.toggle('is-typo', !!best); fx.tabIndex = best ? 0 : -1;
+    if (best) {
+      // 고칠 글자만 표시합니다
+      sg.innerHTML = ''; var d = best[0], k = 0;
+      while (k < d.length && d[k] === dom[k]) k++;
+      var e = 0; while (e < d.length - k && d[d.length - 1 - e] === dom[dom.length - 1 - e]) e++;
+      sg.appendChild(document.createTextNode(v.slice(0, at + 1) + d.slice(0, k))); var m = document.createElement('mark'); m.textContent = d.slice(k, d.length - e); sg.appendChild(m); sg.appendChild(document.createTextNode(d.slice(d.length - e)));
+    }
+    var ok = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v) && !best;
+    root.classList.toggle('is-ok', ok); go.disabled = !ok;
+  }
+  fx.addEventListener('click', function () { if (!fixTo) return; inp.value = fixTo; inp.classList.remove('is-fix'); void inp.offsetWidth; inp.classList.add('is-fix'); check(); inp.focus({ preventScroll: true }); });
+  inp.addEventListener('input', check);
+})();
+</script>

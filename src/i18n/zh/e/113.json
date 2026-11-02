@@ -1,0 +1,26 @@
+{
+ "id": "113",
+ "title": "像素图标工作台",
+ "summary": "在 8×8 网格上点像素、画小图标的工作台。点空格子会填色，点已填的格子会擦掉，拖动可以一次改过路过的格子。",
+ "hint": "点或拖过格子来上色。按 Esc 回到最初的图案",
+ "kw": [
+  "像素",
+  "图标",
+  "网格",
+  "绘制",
+  "擦除",
+  "8×8",
+  "绘图"
+ ],
+ "map": [
+  [
+   "8 × 8 픽셀 아이콘",
+   "8 × 8 像素图标"
+  ],
+  [
+   "<button class=\"pixel\" data-i=\"${i}\" aria-label=\"${Math.floor(i/8)+1}행 ${i%8+1}열\" aria-pressed=\"false\"></button>",
+   "<button class=\"pixel\" data-i=\"${i}\" aria-label=\"第${Math.floor(i/8)+1}行 第${i%8+1}列\" aria-pressed=\"false\"></button>"
+  ]
+ ],
+ "demo": {}
+}

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# 中文版：基于 Lucian UX/UI Prompt 开源项目（MIT）构建
+Sitemap: __SITE_URL__/sitemap.xml

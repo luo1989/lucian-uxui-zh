@@ -1,0 +1,71 @@
+<!-- @meta {"title":"눌러서 확인하는 보안 인증 배지","category":"소셜 증명","summary":"서비스 소개 하단의 보안·인증 배지 줄에 빛이 한 번씩 훑고 지나갑니다. 배지를 누르면 카드가 뒤집혀 인증 기관과 범위, 유효 기간이 보이고, 확인하기를 누르면 고리가 돈 뒤 초록 체크와 함께 확인한 시각이 찍힙니다. 다시 누르면 앞면으로 돌아옵니다.","hint":"배지를 눌러 뒤집고, 확인하기를 눌러 보세요","shape":"square","tags":["trust","security","badges","compliance","saas"]} -->
+<!-- @demo [["wait",1600],["tap",".u243-bg",0,{"after":1100}],["tap",".u243-vf",0,{"after":1900}],["tap",".u243-bg",2,{"after":1500}],["tap",".u243-bg",0,{"after":900}]] -->
+<!-- @en {"title":"Tap-to-verify security badges","summary":"A row of security and compliance badges at the bottom of a product page gets a passing sheen now and then. Press a badge and the card flips to show the certifying body, scope and validity; press Verify and a ring spins before a green check stamps the time it was checked. Press again to flip back.","hint":"Press a badge to flip it, then press Verify","map":[
+  [">믿고 맡길 수 있는 이유<", ">Why you can trust us<"],
+  [">고객 데이터는 국제 기준에 맞춰 보호돼요<", ">Customer data is protected to international standards<"],
+  ["var BG = [['ISO 27001', '정보보호 관리', '국제표준화기구 인증', '전 서비스 · 2027년 3월까지'], ['SOC 2', '보안·가용성', 'Type II 감사 보고서', '연 1회 외부 감사'], ['GDPR', '개인정보 보호', 'EU 개인정보 규정 준수', '데이터 처리 계약 제공'], ['ISMS-P', '국내 정보보호', 'KISA 인증', '2026년 11월까지']]", "var BG = [['ISO 27001', 'Info security', 'Certified by ISO', 'All services · until Mar 2027'], ['SOC 2', 'Security & uptime', 'Type II audit report', 'Audited externally every year'], ['GDPR', 'Privacy', 'EU privacy rules', 'DPA available'], ['ISMS-P', 'Korean infosec', 'Certified by KISA', 'Until Nov 2026']]"],
+  ["'확인하기'", "'Verify'"],
+  ["'확인 중…'", "'Checking…'"],
+  ["'유효함 · 방금 확인'", "'Valid · just checked'"],
+  ["' 자세히 보기'", "' — details'"]
+]} -->
+<style>
+.u243{position:relative;width:340px;height:340px;border-radius:30px;overflow:hidden;background:var(--ux-surface);box-shadow:0 0 0 1px var(--ux-line),0 30px 60px -36px var(--ux-shadow-strong);color:var(--ux-ink)}
+.u243-hd{position:absolute;left:20px;right:20px;top:24px}
+.u243-hd b{display:block;font-size:17px;font-weight:900;letter-spacing:-.03em}
+.u243-hd small{display:block;margin-top:4px;font-size:11px;font-weight:650;color:var(--ux-ink-3)}
+.u243-gd{position:absolute;left:14px;right:14px;top:84px;bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;perspective:700px}
+.u243-bg{position:relative;padding:0;border:0;background:none;font:inherit;color:inherit;cursor:pointer;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.3,1.2,.4,1)}
+.u243-bg.is-flip{transform:rotateY(180deg)}
+.u243-bg:focus-visible{outline:2px solid var(--ux-accent);outline-offset:3px;border-radius:16px}
+.u243-f,.u243-b{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
+.u243-f{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:var(--ux-surface-2);box-shadow:inset 0 0 0 1px var(--ux-line)}
+.u243-f::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-12deg);animation:u243-sh 5.5s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes u243-sh{0%,70%{left:-60%}90%,100%{left:130%}}
+.u243-sd{width:42px;height:46px;display:grid;place-items:center;color:var(--c)}
+.u243-sd svg{width:42px;height:46px}
+.u243-f b{font-size:13px;font-weight:900;letter-spacing:-.01em}
+.u243-f small{font-size:9.5px;font-weight:750;color:var(--ux-ink-3)}
+.u243-b{transform:rotateY(180deg);display:flex;flex-direction:column;padding:11px 12px;text-align:left;background:var(--ux-surface);box-shadow:inset 0 0 0 1.5px var(--c)}
+.u243-b b{font-size:12px;font-weight:900}
+.u243-b span{margin-top:3px;font-size:10px;line-height:1.4;font-weight:700;color:var(--ux-ink-2)}
+.u243-b small{margin-top:2px;font-size:9.5px;font-weight:650;color:var(--ux-ink-3)}
+.u243-vf{display:inline-flex;align-items:center;gap:5px;align-self:flex-start;height:26px;margin-top:auto;padding:0 10px;border:0;border-radius:8px;background:var(--ux-ink);color:var(--ux-surface);font:inherit;font-size:10px;font-weight:850;cursor:pointer}
+.u243-vf i{display:none;width:11px;height:11px;border-radius:50%;border:2px solid color-mix(in srgb,var(--ux-surface) 35%,transparent);border-top-color:var(--ux-surface);animation:u243-sp .7s linear infinite}
+.u243-vf.is-busy i{display:block}
+.u243-vf.is-ok{background:#059669}
+@keyframes u243-sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.u243-bg{transition:none}.u243-f::after,.u243-vf i{animation:none}}
+</style>
+<div class="ux u243">
+  <div class="u243-hd"><b>믿고 맡길 수 있는 이유</b><small>고객 데이터는 국제 기준에 맞춰 보호돼요</small></div>
+  <div class="u243-gd"></div>
+</div>
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  var gd = root.querySelector('.u243-gd');
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // [이름, 앞면 설명, 뒷면 기관, 범위·기간]
+  var BG = [['ISO 27001', '정보보호 관리', '국제표준화기구 인증', '전 서비스 · 2027년 3월까지'], ['SOC 2', '보안·가용성', 'Type II 감사 보고서', '연 1회 외부 감사'], ['GDPR', '개인정보 보호', 'EU 개인정보 규정 준수', '데이터 처리 계약 제공'], ['ISMS-P', '국내 정보보호', 'KISA 인증', '2026년 11월까지']];
+  var COL = ['#2563EB', '#7C3AED', '#0D9488', '#E11D48'];
+  var SHIELD = '<svg viewBox="0 0 42 46" aria-hidden="true"><path d="M21 3l15 5.5v11.5c0 11-6.6 18.8-15 22.5C12.6 38.8 6 31 6 20V8.5z" fill="color-mix(in srgb,currentColor 14%,transparent)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M14.5 22.5l4.5 4.5 9-9.5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  BG.forEach(function (g, i) {
+    var b = document.createElement('div'); b.className = 'u243-bg'; b.style.setProperty('--c', COL[i]); b.style.setProperty('--d', (i * 1.1) + 's'); b.tabIndex = 0; b.setAttribute('role', 'button'); b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', g[0] + ' 자세히 보기');
+    b.innerHTML = '<div class="u243-f"><span class="u243-sd">' + SHIELD + '</span><b></b><small></small></div><div class="u243-b"><b></b><span></span><small></small><button type="button" class="u243-vf" tabindex="-1"><i aria-hidden="true"></i><em style="font-style:normal"></em></button></div>';
+    b.querySelector('.u243-f b').textContent = g[0]; b.querySelector('.u243-f small').textContent = g[1];
+    b.querySelector('.u243-b b').textContent = g[0]; b.querySelector('.u243-b span').textContent = g[2]; b.querySelector('.u243-b small').textContent = g[3];
+    var vf = b.querySelector('.u243-vf'), vl = vf.querySelector('em'); vl.textContent = '확인하기';
+    function flip() { var on = !b.classList.contains('is-flip'); b.classList.toggle('is-flip', on); b.setAttribute('aria-pressed', on); vf.tabIndex = on ? 0 : -1; }
+    b.addEventListener('click', function (e) { if (e.target.closest('.u243-vf')) return; flip(); });
+    b.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target === b) { e.preventDefault(); flip(); } });
+    // 확인: 잠깐 돌다가 확인한 시각을 찍습니다
+    vf.addEventListener('click', function (e) {
+      e.stopPropagation(); if (vf.classList.contains('is-busy') || vf.classList.contains('is-ok')) return;
+      vf.classList.add('is-busy'); vl.textContent = '확인 중…';
+      setTimeout(function () { vf.classList.remove('is-busy'); vf.classList.add('is-ok'); vl.textContent = '유효함 · 방금 확인'; }, rm ? 0 : 900);
+    });
+    gd.appendChild(b);
+  });
+})();
+</script>

@@ -1,0 +1,102 @@
+<!-- @meta {"title":"눌러야 보이는 스포일러 가리개","category":"텍스트 모션","summary":"스포일러 구절은 반짝이는 모래 입자로 덮여 일렁이고, 누르면 누른 자리에서부터 입자가 바깥으로 흩어지며 글이 드러납니다. 줄이 바뀌는 구절도 줄마다 덮여 있고, ‘다시 가리기’를 누르면 입자가 모여들어 다시 덮습니다.","hint":"말풍선 속 일렁이는 부분을 눌러 보세요","shape":"square","tags":["spoiler","chat","particles","reveal","canvas"]} -->
+<!-- @demo [["wait",1200],["tap",".u396-sp",0,{"fx":0.3,"after":1500}],["tap",".u396-sp",1,{"fx":0.6,"after":1700}],["tap",".u396-hide",0,{"after":1800}],["tap",".u396-sp",1,{"fx":0.2,"after":1500}]] -->
+<!-- @en {"title":"Tap-to-reveal spoiler cover","summary":"Spoiler phrases are covered in shimmering grains of sand; tap one and the grains scatter outward from that spot as the text appears. Phrases that wrap are covered line by line, and ‘Hide again’ gathers the grains back to cover them.","hint":"Tap the shimmering parts inside the bubbles","map":[
+  ["<p class=\"u396-b\"><small>민지</small>어제 그 영화 봤어? 마지막에 <span class=\"u396-sp\" tabindex=\"0\" role=\"button\" aria-label=\"스포일러, 눌러서 보기\">범인이 사실 형사였잖아</span>. 진짜 소름이었어.</p>", "<p class=\"u396-b\"><small>Minji</small>Did you see that movie? At the end <span class=\"u396-sp\" tabindex=\"0\" role=\"button\" aria-label=\"Spoiler, tap to show\">the detective was the killer all along</span>. Gave me chills.</p>"],
+  ["<p class=\"u396-b me\">아직 안 봤는데!! 그래도 하나만 더 말해 줘. <span class=\"u396-sp\" tabindex=\"0\" role=\"button\" aria-label=\"스포일러, 눌러서 보기\">쿠키 영상은 있어?</span></p>", "<p class=\"u396-b me\">I haven’t seen it yet!! Just tell me one thing. <span class=\"u396-sp\" tabindex=\"0\" role=\"button\" aria-label=\"Spoiler, tap to show\">Is there a post-credits scene?</span></p>"],
+  [">다시 가리기<", ">Hide again<"],
+  ["'스포일러, 눌러서 보기'", "'Spoiler, tap to show'"]
+]} -->
+<style>
+.u396{position:relative;width:340px;height:330px;display:flex;flex-direction:column;gap:10px;padding:18px 16px 14px;border-radius:28px;background:var(--ux-surface);box-shadow:0 0 0 1px var(--ux-line),0 30px 60px -36px var(--ux-shadow-strong);overflow:hidden}
+.u396-b{position:relative;max-width:88%;margin:0;padding:11px 14px;border-radius:20px 20px 20px 6px;background:var(--ux-surface-2);font-size:14.5px;line-height:1.6;font-weight:550}
+.u396-b small{display:block;font-size:11.5px;font-weight:750;color:var(--ux-ink-3)}
+.u396-b.me{align-self:flex-end;border-radius:20px 20px 6px 20px;background:var(--ux-accent);color:var(--ux-accent-ink)}
+.u396-sp{position:relative;border-radius:4px;color:transparent;cursor:pointer;outline:none;transition:color .5s var(--ux-ease) .1s}
+.u396-sp:focus-visible{box-shadow:0 0 0 2px var(--ux-accent)}
+.u396-sp.open{color:inherit;cursor:text}
+.u396-cv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.u396-hide{align-self:center;margin-top:auto;height:34px;padding:0 14px;border:0;border-radius:999px;background:var(--ux-surface-2);font-size:12.5px;font-weight:750;color:var(--ux-ink-2)}
+</style>
+<div class="ux u396">
+  <p class="u396-b"><small>민지</small>어제 그 영화 봤어? 마지막에 <span class="u396-sp" tabindex="0" role="button" aria-label="스포일러, 눌러서 보기">범인이 사실 형사였잖아</span>. 진짜 소름이었어.</p>
+  <p class="u396-b me">아직 안 봤는데!! 그래도 하나만 더 말해 줘. <span class="u396-sp" tabindex="0" role="button" aria-label="스포일러, 눌러서 보기">쿠키 영상은 있어?</span></p>
+  <button class="u396-hide" type="button">다시 가리기</button>
+  <canvas class="u396-cv" aria-hidden="true"></canvas>
+</div>
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  var cv = root.querySelector('.u396-cv'), ctx = cv.getContext('2d');
+  var sps = Array.prototype.slice.call(root.querySelectorAll('.u396-sp'));
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var dpr = Math.min(2, window.devicePixelRatio || 1), W = 0, H = 0, parts = [], vis = true;
+  function size() { W = root.offsetWidth; H = root.offsetHeight; cv.width = W * dpr; cv.height = H * dpr; }
+  // 구절이 걸친 줄마다 상자를 잡고(배율을 되돌린 px), 그 안에 입자를 뿌립니다
+  function boxes(sp) {
+    var rr = root.getBoundingClientRect(), k = W / (rr.width || 1);
+    return Array.prototype.map.call(sp.getClientRects(), function (r) { return { x: (r.left - rr.left) * k, y: (r.top - rr.top) * k + 2, w: r.width * k, h: r.height * k - 4 }; });
+  }
+  function seed(sp, i) {
+    var light = sp.closest('.me');
+    boxes(sp).forEach(function (b) {
+      var n = Math.round(b.w * b.h / 9);
+      for (var j = 0; j < n; j++) {
+        var x = b.x + Math.random() * b.w, y = b.y + Math.random() * b.h;
+        parts.push({ s: i, hx: x, hy: y, x: x, y: y, vx: 0, vy: 0, a: Math.random(), r: 0.6 + Math.random() * 0.9, out: false, lt: light });
+      }
+    });
+  }
+  function build() { parts = []; size(); sps.forEach(function (sp, i) { if (!sp.classList.contains('open')) seed(sp, i); }); }
+  function frame(t) {
+    if (!root.isConnected) return;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    var dark = getComputedStyle(root).color;
+    parts.forEach(function (p) {
+      if (p.out) { p.x += p.vx; p.y += p.vy; p.vx *= 0.94; p.vy *= 0.94; p.a -= 0.025; }
+      else if (p.back) { p.x += (p.hx - p.x) * 0.12; p.y += (p.hy - p.y) * 0.12; if (Math.abs(p.hx - p.x) < 0.5) p.back = false; }
+      else { p.x = p.hx + Math.sin(t / 300 + p.hy) * 0.8; p.y = p.hy + Math.cos(t / 260 + p.hx) * 0.8; p.a = 0.45 + 0.55 * Math.abs(Math.sin(t / 400 + p.hx * 3)); }
+      if (p.a <= 0) return;
+      ctx.globalAlpha = Math.max(0, Math.min(1, p.a));
+      ctx.fillStyle = p.lt ? '#fff' : dark;
+      ctx.fillRect(p.x, p.y, p.r, p.r);
+    });
+    parts = parts.filter(function (p) { return !p.out || p.a > 0; });
+    if (vis) requestAnimationFrame(frame);
+  }
+  function reveal(sp, cx, cy) {
+    var i = sps.indexOf(sp);
+    if (sp.classList.contains('open')) return;
+    sp.classList.add('open');
+    sp.removeAttribute('role'); sp.removeAttribute('aria-label'); sp.removeAttribute('tabindex');
+    parts.forEach(function (p) {
+      if (p.s !== i) return;
+      var dx = p.x - cx, dy = p.y - cy, d = Math.max(4, Math.hypot(dx, dy));
+      p.out = true; p.vx = dx / d * (2 + Math.random() * 3); p.vy = dy / d * (2 + Math.random() * 3) - 0.5;
+      if (rm) p.a = 0;
+    });
+  }
+  sps.forEach(function (sp) {
+    sp.addEventListener('click', function (e) {
+      var rr = root.getBoundingClientRect(), k = W / (rr.width || 1);
+      var b = boxes(sp)[0];
+      var cx = e.detail === 0 ? b.x + b.w / 2 : (e.clientX - rr.left) * k, cy = e.detail === 0 ? b.y + b.h / 2 : (e.clientY - rr.top) * k;
+      reveal(sp, cx, cy);
+    });
+    sp.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sp.click(); } });
+  });
+  root.querySelector('.u396-hide').addEventListener('click', function () {
+    sps.forEach(function (sp, i) {
+      if (!sp.classList.contains('open')) return;
+      sp.classList.remove('open');
+      sp.setAttribute('role', 'button'); sp.setAttribute('tabindex', '0'); sp.setAttribute('aria-label', '스포일러, 눌러서 보기');
+      var start = parts.length;
+      seed(sp, i);
+      // 새로 뿌린 입자는 바깥에서 모여들며 덮습니다
+      parts.slice(start).forEach(function (p) { var a = Math.random() * Math.PI * 2; p.x = p.hx + Math.cos(a) * 60; p.y = p.hy + Math.sin(a) * 60; p.back = !rm; if (rm) { p.x = p.hx; p.y = p.hy; } });
+    });
+  });
+  new IntersectionObserver(function (en) { var was = vis; vis = en[0].isIntersecting; if (vis && !was) requestAnimationFrame(frame); }).observe(root);
+  requestAnimationFrame(function () { build(); requestAnimationFrame(frame); });
+})();
+</script>

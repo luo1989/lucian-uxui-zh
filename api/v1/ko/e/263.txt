@@ -1,0 +1,58 @@
+<!-- Lucian UX/UI Prompt #263 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#263 -->
+<!--
+Element: 빛이 흐르는 제목과 생각 중 문구
+ID: 263 · Category: 텍스트 모션 · Tags: gradient-text, shimmer, headline, ai, loading-text
+What it does: 섹션 제목의 강조 낱말에 색 그라디언트가 천천히 흘러가고, 아래 AI 답변 말풍선의 ‘생각하는 중…’ 문구에는 회색 글자 위로 밝은 빛이 반복해서 훑고 지나갑니다. 위 칩으로 흐르는 빛·무지개·금빛 세 가지 색 조합을 고르면 제목과 버튼 글자가 함께 바뀌고, 답변이 끝나면 반짝임이 멈추고 실제 문장이 나타납니다.
+How to use it: 위 칩으로 색 조합을 바꾸고, 질문하기를 눌러 생각 중 문구를 보세요
+Footprint: fixed size, square
+Needs: tokens.css (the --ux-* theme tokens and the .ux base). Map the tokens to the project's theme variables.
+Live demo: https://lucianlabs.dev/uxui-prompt/#263
+-->
+<style>
+.u263{position:relative;width:340px;height:340px;border-radius:30px;overflow:hidden;background:var(--ux-surface);box-shadow:0 0 0 1px var(--ux-line),0 30px 60px -36px var(--ux-shadow-strong);color:var(--ux-ink);--g:linear-gradient(90deg,#6366F1,#22D3EE,#A855F7,#6366F1)}
+.u263[data-s="1"]{--g:linear-gradient(90deg,#F43F5E,#F59E0B,#22C55E,#3B82F6,#A855F7,#F43F5E)}
+.u263[data-s="2"]{--g:linear-gradient(90deg,#92400E,#F59E0B,#FDE68A,#D97706,#92400E)}
+.u263-sws{position:absolute;left:18px;top:16px;display:flex;gap:5px}
+.u263-sw{border:0;padding:5px 10px;border-radius:999px;background:var(--ux-surface-2);box-shadow:inset 0 0 0 1px var(--ux-line);color:var(--ux-ink-2);font:inherit;font-size:10.5px;font-weight:800;cursor:pointer}
+.u263-sw.is-on{background:var(--ux-ink);color:var(--ux-surface);box-shadow:none}
+.u263-sw:focus-visible,.u263-ask:focus-visible{outline:2px solid var(--ux-accent);outline-offset:2px}
+.u263-h{position:absolute;left:22px;right:22px;top:56px;margin:0;font-size:27px;line-height:1.2;font-weight:900;letter-spacing:-.045em}
+.u263-h em,.u263-ask span{font-style:normal;background:var(--g);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:u263-flow 5s linear infinite}
+@keyframes u263-flow{to{background-position:-300% 0}}
+.u263-ask{position:absolute;left:22px;top:140px;height:34px;padding:0 15px;border:0;border-radius:999px;background:var(--ux-surface);box-shadow:inset 0 0 0 1.5px var(--ux-line),0 6px 16px -10px var(--ux-shadow-strong);font:inherit;font-size:12px;font-weight:900;cursor:pointer}
+.u263-chat{position:absolute;left:18px;right:18px;bottom:18px;display:flex;flex-direction:column;gap:7px}
+.u263-q{align-self:flex-end;max-width:80%;padding:8px 12px;border-radius:14px 14px 4px 14px;background:var(--ux-accent);color:#fff;font-size:11.5px;font-weight:700;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s}
+.u263-a{align-self:flex-start;max-width:88%;padding:9px 12px;border-radius:14px 14px 14px 4px;background:var(--ux-surface-2);font-size:11.5px;line-height:1.5;font-weight:650;opacity:0;transform:translateY(6px);transition:opacity .3s .15s,transform .3s .15s}
+.u263.is-chat .u263-q,.u263.is-chat .u263-a{opacity:1;transform:none}
+.u263-sh{background:linear-gradient(90deg,var(--ux-ink-3) 0 40%,var(--ux-ink) 50%,var(--ux-ink-3) 60% 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:u263-sh 1.5s linear infinite;font-weight:800}
+@keyframes u263-sh{from{background-position:100% 0}to{background-position:-150% 0}}
+@media (prefers-reduced-motion: reduce){.u263-h em,.u263-ask span,.u263-sh{animation:none}}
+</style>
+<div class="ux u263" data-s="0">
+  <div class="u263-sws" role="group" aria-label="색 조합"></div>
+  <h3 class="u263-h">긴 회의록도<br><em>세 줄로</em> 정리해요</h3>
+  <button type="button" class="u263-ask"><span>질문하기</span></button>
+  <div class="u263-chat" aria-live="polite"><div class="u263-q">이번 주 회의 핵심만 알려 줘</div><div class="u263-a"><span class="u263-ans"></span></div></div>
+</div>
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  var sws = root.querySelector('.u263-sws'), ask = root.querySelector('.u263-ask'), ans = root.querySelector('.u263-ans');
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var SET = ['흐르는 빛', '무지개', '금빛'], B = [], t = 0;
+  SET.forEach(function (n, i) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'u263-sw'; b.textContent = n;
+    b.addEventListener('click', function () { root.dataset.s = i; B.forEach(function (x, k) { x.classList.toggle('is-on', k === i); x.setAttribute('aria-pressed', k === i); }); });
+    sws.appendChild(b); B.push(b);
+  });
+  B[0].classList.add('is-on'); B[0].setAttribute('aria-pressed', 'true');
+  // 질문하면 반짝이는 ‘생각하는 중…’을 보여 주다가 답이 오면 반짝임을 멈추고 문장으로 바꿉니다
+  function answer() { ans.className = 'u263-ans'; ans.textContent = '출시일은 11월 3일로 확정, 가격은 그대로 두고, 디자인 검토는 수요일까지 끝내기로 했어요.'; }
+  ask.addEventListener('click', function () {
+    clearTimeout(t); root.classList.add('is-chat');
+    ans.className = 'u263-ans u263-sh'; ans.textContent = '생각하는 중…';
+    t = setTimeout(answer, rm ? 300 : 2400);
+  });
+  root.classList.add('is-chat'); answer();
+})();
+</script>

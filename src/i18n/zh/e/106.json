@@ -1,0 +1,30 @@
+{
+ "id": "106",
+ "title": "剧场座位图",
+ "summary": "购票页面里的座位分布图。点空座位即可选中，再点一次取消，已选座位和合计金额会显示在下方。",
+ "hint": "点空座位选中，再点一次取消。已预订的座位（×）不能选",
+ "kw": [
+  "座位图",
+  "选座",
+  "剧场",
+  "购票",
+  "合计",
+  "已预订",
+  "座位"
+ ],
+ "map": [
+  [
+   "스크린",
+   "银幕"
+  ],
+  [
+   "<button class=\"seat\" data-seat=\"${s}\" aria-label=\"${s} ${taken.includes(s)?'예약됨':'좌석'}\" aria-pressed=\"false\" ${taken.includes(s)?'disabled':''}>${taken.includes(s)?'×':i+1}</button>",
+   "<button class=\"seat\" data-seat=\"${s}\" aria-label=\"${s} ${taken.includes(s)?'已预订':'可选'}\" aria-pressed=\"false\" ${taken.includes(s)?'disabled':''}>${taken.includes(s)?'×':i+1}</button>"
+  ],
+  [
+   "원",
+   "韩元"
+  ]
+ ],
+ "demo": {}
+}

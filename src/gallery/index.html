@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Lucian UX/UI Prompt 中文版 · 400 个可交互 UX/UI 组件与 AI 提示词</title>
+<meta name="description" content="400 个可以直接上手试的 UX/UI 组件：200 个界面组件，加上 200 个做网站时随手就能用的动画。全部提供深色/浅色主题、可运行代码，以及一键复制的中文 AI 提示词。">
+<meta name="keywords" content="UI 组件库,UX 灵感,UI 动效,AI 提示词,前端组件,交互设计,中文素材库">
+<meta name="author" content="Lucian UX/UI Prompt 中文本地化版本">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#F4F2EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#07080D" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://lucian-uxui-zh.pages.dev/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lucian UX/UI Prompt 中文版">
+<meta property="og:title" content="Lucian UX/UI Prompt 中文版 · 400 个可交互 UX/UI 组件与 AI 提示词">
+<meta property="og:description" content="400 个可以直接上手试的 UX/UI 组件：200 个界面组件，加上 200 个做网站时随手就能用的动画。深色/浅色主题、可运行代码、中文 AI 提示词。">
+<meta property="og:url" content="https://lucian-uxui-zh.pages.dev/">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lucian-uxui-zh.pages.dev/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lucian UX/UI Prompt 中文版">
+<meta name="twitter:description" content="400 个可交互 UX/UI 组件 + 中文 AI 提示词，深色/浅色主题，代码可直接复制。">
+<meta name="twitter:image" content="https://lucian-uxui-zh.pages.dev/og-cover.png">
+<link rel="icon" href="data:,">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CollectionPage","name":"Lucian UX/UI Prompt 中文版","description":"400 个可交互 UX/UI 组件与中文 AI 提示词素材库，含深色/浅色主题与可运行代码。","url":"https://lucian-uxui-zh.pages.dev/","inLanguage":"zh-CN","isAccessibleForFree":true,"license":"https://opensource.org/licenses/MIT","isBasedOn":"https://github.com/Seokwoooo/lucian-uxui-prompt","mainEntity":{"@type":"ItemList","numberOfItems":400,"name":"UX/UI 组件与动画"}}
+</script>
+<script>
+/* 首屏绘制前先决定主题和语言。
+   语言：读取上次选择；没有就默认简体中文（本版本默认中文），仍可在 中 / EN / KO 之间切换 */
+(function(){var r=document.documentElement;r.classList.add('js');
+try{var s=localStorage.getItem('ux-gallery-theme');if(s==='dark'||s==='light')r.setAttribute('data-theme',s)}catch(e){}
+var l=null;try{l=localStorage.getItem('ux-gallery-lang')}catch(e){}
+if(l!=='zh'&&l!=='ko'&&l!=='en')l='zh';
+r.setAttribute('lang',l==='zh'?'zh-CN':l);if(l!=='zh')r.classList.add('i18n-wait')})();
+</script>
+<style>
+/*@TOKENS@*/
+</style>
+<style>
+/*@GALLERY_CSS@*/
+</style>
+</head>
+<body data-view="grid">
+<a class="g-skip" href="#grid" data-i18n="skip">跳到组件列表</a>
+
+<header class="g-head" id="top">
+  <div class="g-head-line">
+    <a class="g-brand" href="#top" aria-label="Lucian UX/UI Prompt，回到顶部" data-i18n-attr="aria-label:brand">
+      <span class="g-orb" aria-hidden="true"></span>
+      <span class="g-brand-t">lucianLabs</span>
+      <span class="g-brand-s">UX/UI Prompt</span>
+    </a>
+    <div class="g-head-r">
+      <button class="g-link g-link--skill" type="button" id="to-skill" data-i18n="skillBtn">Agent 技能</button>
+      <button class="g-link" type="button" id="to-guide" data-i18n="guideBtn">使用方法</button>
+      <div class="g-lang" role="group" aria-label="语言" data-i18n-attr="aria-label:langGroup">
+        <span class="g-lang-pill" aria-hidden="true"></span>
+        <svg class="g-lang-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.3 3.6 5.1 3.6 8.5s-1.2 6.2-3.6 8.5c-2.4-2.3-3.6-5.1-3.6-8.5S9.6 5.8 12 3.5z"/></svg>
+        <button class="g-lang-b" type="button" data-lang="zh" lang="zh-CN" aria-pressed="true" aria-label="简体中文">中</button>
+        <button class="g-lang-b" type="button" data-lang="en" lang="en" aria-pressed="false" aria-label="English">EN</button>
+        <button class="g-lang-b" type="button" data-lang="ko" lang="ko" aria-pressed="false" aria-label="한국어">KO</button>
+      </div>
+    </div>
+  </div>
+  <div class="g-intro">
+    <h1 class="g-intro-t" aria-label="Lucian UX/UI Prompt" data-i18n-attr="aria-label:h1">
+      <span class="g-w" aria-hidden="true" data-i18n="w1">Lucian</span>
+      <span class="g-w" aria-hidden="true" data-i18n="w2">UX/UI</span>
+      <b class="g-w" aria-hidden="true" data-i18n="w3">Prompt</b>
+    </h1>
+    <div class="g-intro-r">
+      <p class="g-intro-s" data-i18n="intro">从按钮、图表到工作流界面，200 个界面组件；再加上做网站时随手就能用的 200 个动画：首屏、价格表、购物车、表单、仪表盘。滚动到眼前时会自己演示，也可以直接上手操作。看中了就把提示词或代码带走。</p>
+      <p class="g-intro-meta"><span id="count-wrap"><b id="count">400</b> 个</span><span class="g-dot" aria-hidden="true"></span><span data-i18n="metaTheme">深色 · 浅色</span><span class="g-dot" aria-hidden="true"></span><span data-i18n="metaCode">附代码</span></p>
+      <div class="g-install"><p class="g-install-cmd"><code>npx skills add Seokwoooo/lucian-uxui</code><button class="g-cmd-c" type="button" data-copy aria-label="复制命令" data-i18n-attr="aria-label:copyCmd"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8"/></svg></button></p><a class="g-gh" href="https://github.com/Seokwoooo/lucian-uxui-prompt" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a></div>
+      <p class="g-intro-links"><button class="g-intro-link" type="button" data-open-skill data-i18n="skillBtnLong">在 AI Agent 里使用 →</button></p>
+    </div>
+  </div>
+</header>
+
+<div class="g-bar" id="bar">
+  <div class="g-bar-in">
+    <div class="g-sets" id="sets" role="group" aria-label="合集" data-i18n-attr="aria-label:sets">
+      <span class="g-sets-pill" aria-hidden="true"></span>
+      <button class="g-set" type="button" data-set="all" aria-pressed="true"><span data-i18n="setAll">全部</span><i>400</i></button>
+      <button class="g-set g-set--new" type="button" data-set="2" aria-pressed="false"><em aria-hidden="true">NEW</em><span data-i18n="setNew">动画</span><i>200</i></button>
+      <button class="g-set" type="button" data-set="1" aria-pressed="false"><span data-i18n="setOld">界面</span><i>200</i></button>
+    </div>
+    <nav class="g-cats" id="cats" aria-label="分类" data-i18n-attr="aria-label:cats">
+      <span class="g-cats-pill" aria-hidden="true"></span>
+    </nav>
+    <div class="g-tools">
+      <div class="g-search" id="search">
+        <button class="g-tool g-search-btn" type="button" id="search-btn" aria-label="打开搜索" data-i18n-attr="aria-label:searchOpen" aria-expanded="false" aria-controls="q">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.2 4.2"/></svg>
+        </button>
+        <input id="q" type="search" placeholder="按钮、图表、登录…" autocomplete="off" aria-label="搜索组件" data-i18n-attr="placeholder:searchPh;aria-label:searchLabel" tabindex="-1">
+      </div>
+      <button class="g-tool g-tool--label g-fav-only" type="button" id="fav-only" aria-pressed="false" aria-label="只看收藏" data-i18n-attr="aria-label:favOnly">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg>
+        <span data-i18n="favBtn">收藏</span>
+      </button>
+      <button class="g-tool g-auto" type="button" data-auto aria-pressed="true" aria-label="自动演示">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="g-auto-play" d="M8.5 6.2v11.6l9.2-5.8z"/><path class="g-auto-pause" d="M8.5 6.5v11M15.5 6.5v11"/></svg>
+      </button>
+      <button class="g-tool g-tool--label" type="button" id="to-reel" aria-label="用 Reels 全屏浏览" data-i18n-attr="aria-label:reelBtn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3.5" width="12" height="17" rx="3"/><path d="M10.5 9.6v4.8l4-2.4z" fill="currentColor" stroke="none"/></svg>
+        <span data-i18n="reelLabel">Reels</span>
+      </button>
+      <button class="g-tool g-theme" type="button" id="theme" aria-label="切换到深色主题">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <mask id="g-moon-mask"><rect width="24" height="24" fill="#fff"/><circle class="g-moon-cut" cx="24" cy="4" r="7" fill="#000"/></mask>
+          <circle class="g-sun-core" cx="12" cy="12" r="5" mask="url(#g-moon-mask)" fill="currentColor" stroke="none"/>
+          <g class="g-sun-rays"><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main class="g-grid" id="grid" aria-label="UI 组件" data-i18n-attr="aria-label:grid"><!--@GRID_TILES@--></main>
+<div class="g-more" id="more" aria-hidden="true"></div>
+<div class="g-empty" id="empty" hidden>
+  <p class="g-empty-t" id="empty-t" data-i18n="emptyT">没有找到匹配的组件</p>
+  <p class="g-empty-s" id="empty-s" data-i18n="emptyS">换个关键词试试，或者把分类切到「全部」。</p>
+  <button class="g-btn" type="button" id="empty-reset"><span id="empty-b" data-i18n="emptyB">清除搜索</span></button>
+</div>
+<noscript><p class="g-noscript">这个素材库需要 JavaScript 才能交互、搜索和复制提示词。请开启 JavaScript 后重新加载。</p></noscript>
+
+<footer class="g-foot" id="foot">
+  <p class="g-foot-t"><span data-i18n="attrText">基于 Lucian UX/UI Prompt 开源项目构建 · 中文本地化版本</span></p>
+  <p class="g-foot-l">
+    <a href="https://github.com/Seokwoooo/lucian-uxui-prompt" target="_blank" rel="noopener" data-i18n="attrSrc">原项目</a>
+    <span class="g-dot" aria-hidden="true"></span>
+    <a href="https://github.com/Seokwoooo/lucian-uxui-prompt/blob/main/LICENSE" target="_blank" rel="noopener" data-i18n="attrLicense">MIT 许可证</a>
+    <span class="g-dot" aria-hidden="true"></span>
+    <a href="https://lucianlabs.dev/uxui-prompt/" target="_blank" rel="noopener">lucianlabs.dev</a>
+    <span class="g-dot" aria-hidden="true"></span>
+    <a href="https://github.com/luo1989/lucian-uxui-zh" target="_blank" rel="noopener">中文版仓库</a>
+  </p>
+</footer>
+
+<!-- Reels：一屏一个组件，上下滑动切换 -->
+<div class="g-reel" id="reel" role="region" aria-label="UI 组件 Reels" data-i18n-attr="aria-label:reel" aria-hidden="true"></div>
+<nav class="g-hud" id="hud" aria-label="Reels 控制" data-i18n-attr="aria-label:hud">
+  <button class="g-hud-b" type="button" data-act="back" aria-label="返回网格" data-i18n-attr="aria-label:back">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></svg>
+    <span data-i18n="backText">网格</span>
+  </button>
+  <div class="g-prog" aria-live="polite"><span id="prog-n">201</span><i><b id="prog-bar"></b></i><span id="prog-t">400</span></div>
+  <div class="g-hud-r">
+    <button class="g-hud-b g-hud-ic g-auto" type="button" data-auto aria-pressed="true" aria-label="自动演示">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path class="g-auto-play" d="M8.5 6.2v11.6l9.2-5.8z"/><path class="g-auto-pause" d="M8.5 6.5v11M15.5 6.5v11"/></svg>
+    </button>
+    <button class="g-hud-b g-hud-ic g-hud-theme" type="button" data-act="theme" aria-label="切换主题">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/><path d="M12 4.5a7.5 7.5 0 0 1 0 15z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</nav>
+
+<dialog class="g-dlg g-dlg--prompt" id="dlg-prompt" aria-labelledby="pr-title">
+  <div class="g-dlg-head">
+    <div>
+      <p class="g-dlg-kicker"><span id="pr-num"></span> · <span id="pr-cat"></span></p>
+      <h2 class="g-dlg-title" id="pr-title"></h2>
+    </div>
+    <div class="g-dlg-head-r">
+      <button class="g-dlg-fav" type="button" id="pr-fav" aria-pressed="false" aria-label="收藏">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg>
+      </button>
+      <button class="g-x" type="button" data-close aria-label="关闭" data-i18n-attr="aria-label:close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="g-seg" role="tablist" aria-label="切换视图" data-i18n-attr="aria-label:seg">
+    <button class="g-seg-b" type="button" role="tab" id="tab-prompt" aria-selected="true" aria-controls="pr-text" data-i18n="tabPrompt">应用提示词</button>
+    <button class="g-seg-b" type="button" role="tab" id="tab-code" aria-selected="false" aria-controls="pr-text" data-i18n="tabCode">代码</button>
+    <span class="g-seg-pill" aria-hidden="true"></span>
+  </div>
+  <textarea class="g-code" id="pr-text" readonly spellcheck="false" aria-label="应用提示词" role="tabpanel"></textarea>
+  <p class="g-dlg-skill"><span data-i18n="skillLine">在 Agent 里调用</span><code id="pr-skill"></code><button class="g-cmd-c" type="button" data-copy aria-label="复制命令" data-i18n-attr="aria-label:copyCmd"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8"/></svg></button><button class="g-link-s" type="button" data-open-skill data-i18n="skillHow">安装方法</button></p>
+  <div class="g-dlg-foot">
+    <span class="g-dlg-hint" id="pr-hint"></span>
+    <div class="g-dlg-acts">
+      <button class="g-btn" type="button" id="pr-dl">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M5 19.5h14"/></svg><span data-i18n="dl">下载代码文件</span>
+      </button>
+      <button class="g-btn g-btn--pri" type="button" id="pr-copy">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8"/></svg><span>复制提示词</span>
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="g-dlg g-dlg--guide" id="dlg-guide" aria-labelledby="guide-title">
+  <div class="g-dlg-head">
+    <div>
+      <p class="g-dlg-kicker" data-i18n="guideKick">使用方法</p>
+      <h2 class="g-dlg-title" id="guide-title" data-i18n="guideTitle">这样带走它</h2>
+    </div>
+    <button class="g-x" type="button" data-close aria-label="关闭" data-i18n-attr="aria-label:close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <ol class="g-steps" id="guide-steps">
+    <li><b>先看，再上手。</b>组件进入视野后会循环播放一段操作演示。你直接点它、或用键盘进入时演示会停下，松手一会儿后从头再来。</li>
+    <li><b>复制提示词</b>会带上组件的完整可运行代码和接入说明。粘到项目里的 AI 工具，补上插入位置即可。</li>
+    <li><b>下载代码文件</b>会把同一个组件存成独立 HTML，自带深色/浅色主题令牌，打开就能看。</li>
+    <li>语言、主题、自动演示都在顶部按钮里切换，选择会在下次访问时保留。</li>
+  </ol>
+  <section class="g-skill" id="guide-skill" aria-labelledby="skill-title" tabindex="-1">
+    <h3 class="g-skill-t" id="skill-title" data-i18n="skillTitle">交给 AI Agent 完成</h3>
+    <p class="g-skill-p" data-i18n="skillLead">安装 lucian-uxui 技能后，Claude Code、Codex 等编码 Agent 能在这个素材库里找到合适的组件，并搬进你的项目。</p>
+    <ul class="g-cmds">
+      <li><span class="g-cmd-l" data-i18n="skillAny">所有 Agent</span><code>npx skills add Seokwoooo/lucian-uxui</code><button class="g-cmd-c" type="button" data-copy aria-label="复制命令" data-i18n-attr="aria-label:copyCmd"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8"/></svg></button></li>
+      <li><span class="g-cmd-l" data-i18n="skillPlugin">Claude Code 插件</span><code>/plugin marketplace add Seokwoooo/lucian-uxui</code><button class="g-cmd-c" type="button" data-copy aria-label="复制命令" data-i18n-attr="aria-label:copyCmd"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8"/></svg></button></li>
+      <li><span class="g-cmd-l" aria-hidden="true"></span><code>/plugin install lucian-uxui@lucian-uxui</code><button class="g-cmd-c" type="button" data-copy aria-label="复制命令" data-i18n-attr="aria-label:copyCmd"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8"/></svg></button></li>
+    </ul>
+    <dl class="g-skill-use">
+      <dt data-i18n="useAsk">用一句话说需求</dt><dd data-i18n="useAskEx">「用 lucian-uxui 技能给页面加上套餐切换和 FAQ」</dd>
+      <dt data-i18n="usePick">按编号挑</dt><dd data-i18n="usePickEx">「用 lucian-uxui 技能加上 056 号组件」</dd>
+      <dt data-i18n="useCall">直接调用</dt><dd data-i18n-html="useCallEx">Claude Code <code>/lucian-uxui</code>（插件形式 <code>/lucian-uxui:lucian-uxui</code>）· Codex <code>$lucian-uxui</code></dd>
+    </dl>
+    <p class="g-skill-links"><a href="https://github.com/Seokwoooo/lucian-uxui" target="_blank" rel="noopener">GitHub</a><a href="https://lucianlabs.dev/uxui-prompt/introducing/#ch-skill" data-i18n="skillMore">了解更多</a></p>
+  </section>
+  <p class="g-note" data-i18n-html="guideNote">开发备注 · 每个组件的样式和脚本都收在 <code>.ux</code> 和 <code>.uNNN</code> 前缀里。颜色只使用 <code>--ux-*</code> 令牌，接到项目主题变量上即可。</p>
+</dialog>
+
+<div class="g-toast" id="toast" role="status" aria-live="polite"></div>
+
+<script id="ux-data" type="application/json">__UX_DATA__</script>
+<script>
+/*@GALLERY_JS@*/
+</script>
+</body>
+</html>

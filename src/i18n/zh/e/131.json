@@ -1,0 +1,41 @@
+{
+ "id": "131",
+ "title": "同行人信息录入",
+ "summary": "为每位同行人重复收集同样信息的输入组。点“添加”会多出一行并自动编号，每一行也能单独删除。",
+ "hint": "点“＋ 同行人”增加一行，用 × 删掉",
+ "kw": [
+  "表单",
+  "同行人",
+  "重复字段",
+  "动态添加",
+  "删除行",
+  "多人",
+  "录入",
+  "出行"
+ ],
+ "map": [
+  [
+   "＋ 동행자",
+   "＋ 同行人"
+  ],
+  [
+   "동행자",
+   "同行人"
+  ],
+  [
+   ":'&#39;'}[c]));const motion=(node,frames,opts={})=>{if(node?.animate&&!matchMedia('(prefers-reduced-motion:reduce)').matches)node.animate(frames,{duration:220,easing:'cubic-bezier(.2,.8,.2,1)',...opts})};let people=['서윤'];function render(focus=false){$('.people').innerHTML=people.map((name,i)=>'<div class=",
+   ":'&#39;'}[c]));const motion=(node,frames,opts={})=>{if(node?.animate&&!matchMedia('(prefers-reduced-motion:reduce)').matches)node.animate(frames,{duration:220,easing:'cubic-bezier(.2,.8,.2,1)',...opts})};let people=['瑞允'];function render(focus=false){$('.people').innerHTML=people.map((name,i)=>'<div class="
+  ],
+  [
+   "이름",
+   "姓名"
+  ],
+  [
+   "삭제",
+   "删除"
+  ]
+ ],
+ "demo": {
+  "지호": "志浩"
+ }
+}

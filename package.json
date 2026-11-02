@@ -1,0 +1,32 @@
+{
+  "name": "lucian-uxui-zh",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Lucian UX/UI Prompt 简体中文版：400 个可交互 UX/UI 组件与中文 AI 提示词（基于上游 MIT 项目构建）",
+  "license": "MIT",
+  "homepage": "https://lucian-uxui-zh.pages.dev/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luo1989/lucian-uxui-zh.git"
+  },
+  "upstream": {
+    "repo": "https://github.com/Seokwoooo/lucian-uxui-prompt",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2026 Seokwoooo"
+  },
+  "scripts": {
+    "build": "ZH_STRICT=1 node src/build.mjs",
+    "build:dev": "node src/build.mjs",
+    "site": "ZH_STRICT=1 node src/build.mjs --site",
+    "zh:extract": "node tools/extract-zh-work.mjs",
+    "zh:merge": "node tools/merge-zh.mjs",
+    "zh:check": "node tools/merge-zh.mjs --check",
+    "serve": "node tools/serve.mjs",
+    "test": "node tools/smoke-test.mjs",
+    "deploy": "npm run site && npx --yes wrangler@4 pages deploy dist --project-name lucian-uxui-zh --branch main"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

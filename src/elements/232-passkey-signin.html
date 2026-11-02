@@ -1,0 +1,79 @@
+<!-- @meta {"title":"지문 한 번으로 끝나는 패스키 로그인","category":"폼·입력","summary":"로그인 카드에서 패스키로 로그인을 누르면 아래에서 기기 확인 시트가 올라오고, 가운데 지문 무늬가 바깥 고리부터 차례로 빛나며 읽힙니다. 다 읽히면 지문이 체크로 바뀌며 시트가 내려가고, 로그인 카드는 환영 화면으로 넘어가 이름이 떠오릅니다. 시트에서 취소를 누르면 그대로 내려가 처음으로 돌아갑니다.","hint":"패스키로 로그인을 눌러 지문 확인이 끝나는 모습을 보세요","shape":"square","tags":["passkey","login","biometric","webauthn","auth"]} -->
+<!-- @demo [["wait",900],["tap",".u232-pk",0,{"after":3400}],["wait",1200],["reset"]] -->
+<!-- @en {"title":"One-touch passkey sign-in","summary":"Press Sign in with a passkey on a login card and a device check sheet rises from below, its fingerprint pattern lighting up ring by ring from the outside as it reads. When the read finishes the fingerprint turns into a check, the sheet slides down, and the login card moves on to a welcome screen as your name floats in. Press Cancel on the sheet and it simply slides away, back to the start.","hint":"Press Sign in with a passkey and watch the fingerprint check finish","map":[
+  [">다시 오셨네요<", ">Welcome back<"],
+  [">비밀번호 없이 바로 들어가세요<", ">Skip the password and go right in<"],
+  [">패스키로 로그인<", ">Sign in with a passkey<"],
+  [">다른 방법으로 로그인<", ">Other sign-in options<"],
+  [">이 기기로 확인할게요<", ">Confirm on this device<"],
+  ["'지문 센서에 손가락을 대 주세요'", "'Touch the fingerprint sensor'"],
+  ["'확인했어요'", "'Confirmed'"],
+  [">취소<", ">Cancel<"],
+  [">반가워요, 민지 님<", ">Hi, Minji<"],
+  [">작업 공간을 여는 중…<", ">Opening your workspace…<"]
+]} -->
+<style>
+.u232{position:relative;width:340px;height:340px;border-radius:30px;overflow:hidden;background:radial-gradient(80% 60% at 50% 0%,var(--ux-accent-soft),transparent 70%),var(--ux-surface);box-shadow:0 0 0 1px var(--ux-line),0 30px 60px -36px var(--ux-shadow-strong);color:var(--ux-ink);text-align:center}
+.u232-v{position:absolute;inset:0;padding:42px 26px 0;transition:opacity .35s,transform .45s cubic-bezier(.3,1.2,.5,1)}
+.u232.is-in .u232-v1{opacity:0;transform:translateY(-12px);pointer-events:none}
+.u232-v2{opacity:0;transform:translateY(14px);pointer-events:none;padding-top:92px}
+.u232.is-in .u232-v2{opacity:1;transform:none;transition-delay:.2s}
+.u232-lg{width:48px;height:48px;margin:0 auto;border-radius:15px;background:var(--ux-grad);box-shadow:0 14px 26px -12px var(--ux-accent)}
+.u232 h3{margin:16px 0 0;font-size:21px;font-weight:900;letter-spacing:-.035em}
+.u232-v1>p{margin:5px 0 0;font-size:11.5px;font-weight:650;color:var(--ux-ink-3)}
+.u232-pk{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:50px;margin-top:28px;border:0;border-radius:15px;background:var(--ux-ink);color:var(--ux-surface);font:inherit;font-size:13.5px;font-weight:850;cursor:pointer;transition:transform .15s}
+.u232-pk:active{transform:scale(.98)}
+.u232-pk svg{width:20px;height:20px}
+.u232-al{display:block;margin:14px auto 0;padding:0;border:0;background:none;color:var(--ux-ink-3);font:inherit;font-size:11px;font-weight:750;text-decoration:underline;text-underline-offset:3px}
+.u232-av{width:64px;height:64px;margin:0 auto;border-radius:50%;background:linear-gradient(135deg,#F9A8D4,#A78BFA);display:grid;place-items:center;color:#fff;font-size:24px;font-weight:900;box-shadow:0 0 0 6px var(--ux-surface),0 0 0 8px color-mix(in srgb,var(--ux-accent) 30%,transparent)}
+.u232-v2 p{margin:6px 0 0;font-size:11px;font-weight:650;color:var(--ux-ink-3)}
+.u232-dim{position:absolute;inset:0;background:rgba(10,10,20,.35);opacity:0;pointer-events:none;transition:opacity .3s}
+.u232.is-sheet .u232-dim{opacity:1;pointer-events:auto}
+.u232-sh{position:absolute;left:8px;right:8px;bottom:8px;padding:18px 18px 16px;border-radius:24px;background:var(--ux-surface);box-shadow:0 -10px 40px -10px rgba(0,0,0,.35);transform:translateY(110%);transition:transform .45s cubic-bezier(.3,1.15,.4,1)}
+.u232.is-sheet .u232-sh{transform:none}
+.u232-sh b{display:block;font-size:13.5px;font-weight:900}
+.u232-fp{position:relative;width:86px;height:86px;margin:14px auto 0}
+.u232-fp svg{width:86px;height:86px}
+.u232-fp path{fill:none;stroke:var(--ux-surface-3);stroke-width:2.6;stroke-linecap:round;transition:stroke .25s}
+.u232-fp path.is-on{stroke:var(--ux-accent)}
+.u232-fp .ok{position:absolute;inset:0;border-radius:50%;background:#10B981;display:grid;place-items:center;transform:scale(0);transition:transform .4s cubic-bezier(.3,1.7,.5,1)}
+.u232-fp .ok::after{content:"";width:14px;height:26px;margin-top:-6px;border:solid #fff;border-width:0 5px 5px 0;transform:rotate(45deg)}
+.u232.is-ok .u232-fp .ok{transform:none}
+.u232-sh small{display:block;margin-top:10px;font-size:11px;font-weight:700;color:var(--ux-ink-3);min-height:15px}
+.u232-cx{margin-top:10px;width:100%;height:38px;border:0;border-radius:11px;background:var(--ux-surface-2);color:var(--ux-ink-2);font:inherit;font-size:12px;font-weight:850;cursor:pointer}
+.u232 button:focus-visible{outline:2px solid var(--ux-accent);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){.u232-v,.u232-sh,.u232-dim,.u232-fp .ok{transition:none}}
+</style>
+<div class="ux u232">
+  <div class="u232-v u232-v1"><div class="u232-lg" aria-hidden="true"></div><h3>다시 오셨네요</h3><p>비밀번호 없이 바로 들어가세요</p>
+    <button type="button" class="u232-pk"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="7.5" cy="7" r="3.3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M2 16.5c.6-2.8 2.7-4.3 5.5-4.3 1.2 0 2.3.3 3.2.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="15" cy="12.5" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15 14.7v3.3M15 16.4h1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>패스키로 로그인</button>
+    <button type="button" class="u232-al">다른 방법으로 로그인</button></div>
+  <div class="u232-v u232-v2" aria-live="polite"><div class="u232-av" aria-hidden="true">M</div><h3>반가워요, 민지 님</h3><p>작업 공간을 여는 중…</p></div>
+  <div class="u232-dim" aria-hidden="true"></div>
+  <div class="u232-sh" role="dialog" aria-hidden="true"><b>이 기기로 확인할게요</b>
+    <div class="u232-fp" aria-hidden="true"><svg viewBox="0 0 86 86"><path d="M43 12a31 31 0 0 1 31 31"/><path d="M12 43a31 31 0 0 1 22-29.7"/><path d="M20 58a27 27 0 0 1-2-15A25 25 0 0 1 68 43c0 6-1 11-3 16"/><path d="M27 66a33 33 0 0 1-3-11v-12a19 19 0 0 1 38 0v9"/><path d="M36 72a40 40 0 0 1-5-19V43a12 12 0 0 1 24 0v13c0 6-1 11-3 15"/><path d="M43 43v12c0 8 2 14 6 20"/></svg><span class="ok"></span></div>
+    <small class="u232-ms" aria-live="polite"></small>
+    <button type="button" class="u232-cx">취소</button></div>
+</div>
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  var pk = root.querySelector('.u232-pk'), sh = root.querySelector('.u232-sh'), cx = root.querySelector('.u232-cx'), ms = root.querySelector('.u232-ms'), dim = root.querySelector('.u232-dim');
+  var P = Array.prototype.slice.call(root.querySelectorAll('.u232-fp path'));
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var gen = 0;
+  function later(g, ms2, fn) { setTimeout(function () { if (g === gen && root.isConnected) fn(); }, rm ? Math.min(ms2, 80) : ms2); }
+  function close() { gen++; root.classList.remove('is-sheet', 'is-ok'); sh.setAttribute('aria-hidden', 'true'); P.forEach(function (p) { p.classList.remove('is-on'); }); pk.focus({ preventScroll: true }); }
+  // 시트를 올리고 지문 무늬를 바깥 고리부터 한 줄씩 밝힌 뒤 체크로 바꿉니다
+  pk.addEventListener('click', function () {
+    var g = ++gen;
+    root.classList.add('is-sheet'); sh.setAttribute('aria-hidden', 'false'); ms.textContent = '지문 센서에 손가락을 대 주세요';
+    P.forEach(function (p, i) { later(g, 700 + i * 220, function () { p.classList.add('is-on'); }); });
+    later(g, 700 + P.length * 220 + 200, function () { root.classList.add('is-ok'); ms.textContent = '확인했어요'; });
+    later(g, 700 + P.length * 220 + 900, function () { root.classList.remove('is-sheet'); sh.setAttribute('aria-hidden', 'true'); root.classList.add('is-in'); });
+  });
+  cx.addEventListener('click', close);
+  dim.addEventListener('click', close);
+  root.addEventListener('keydown', function (e) { if (e.key === 'Escape' && root.classList.contains('is-sheet')) close(); });
+})();
+</script>

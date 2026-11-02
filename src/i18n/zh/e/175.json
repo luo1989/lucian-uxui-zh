@@ -1,0 +1,55 @@
+{
+ "id": "175",
+ "title": "统一尺度的对比轨道",
+ "summary": "把单位不同的产品指标各放一行、摆在轨道上比较的图表。按下「统一尺度」，重量、电池、价格都换算成 0–100 分，好坏一眼可见。",
+ "hint": "按右上角的「统一尺度」试试",
+ "kw": [
+  "归一化",
+  "标准化",
+  "指标对比",
+  "评分",
+  "产品对比",
+  "权重",
+  "电池",
+  "价格"
+ ],
+ "map": [
+  [
+   "척도 맞춤",
+   "统一尺度"
+  ],
+  [
+   "무게",
+   "重量"
+  ],
+  [
+   "배터리",
+   "电池"
+  ],
+  [
+   "가격",
+   "价格"
+  ],
+  [
+   "<div class=\"metric\" data-k=\"${i}\"><div class=\"title\"><b>${x[0]}</b><small>${x[6]?'낮을수록 좋음':'높을수록 좋음'}</small></div><div class=\"rail\"><i class=\"dot a\" style=\"--c:#4D83B0\"></i><i class=\"dot b\" style=\"--c:#BE774C\"></i></div><div class=\"values\"><span class=\"va\"></span><span class=\"vb\"></span></div></div>",
+   "<div class=\"metric\" data-k=\"${i}\"><div class=\"title\"><b>${x[0]}</b><small>${x[6]?'越低越好':'越高越好'}</small></div><div class=\"rail\"><i class=\"dot a\" style=\"--c:#4D83B0\"></i><i class=\"dot b\" style=\"--c:#BE774C\"></i></div><div class=\"values\"><span class=\"va\"></span><span class=\"vb\"></span></div></div>"
+  ],
+  [
+   "낮을수록 좋음",
+   "越低越好"
+  ],
+  [
+   "높을수록 좋음",
+   "越高越好"
+  ],
+  [
+   "점",
+   "分"
+  ],
+  [
+   "0–100 점수",
+   "0–100 分"
+  ]
+ ],
+ "demo": {}
+}

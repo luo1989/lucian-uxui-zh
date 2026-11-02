@@ -1,0 +1,27 @@
+{
+ "id": "167",
+ "title": "请求耗时跨度分解",
+ "summary": "把一次请求里的调用按层级拆成横条的链路视图。点按横条会强调该调用并显示耗时，再按一次取消选择。",
+ "hint": "点一下其中一条横条试试",
+ "kw": [
+  "链路追踪",
+  "跨度",
+  "Trace",
+  "耗时分析",
+  "请求分解",
+  "性能监控",
+  "瀑布图",
+  "调用链"
+ ],
+ "map": [
+  [
+   "호출 스팬",
+   "调用跨度"
+  ],
+  [
+   "<button class=\"span\" data-k=\"${i}\" style=\"--depth:${x[3]};--left:${x[1]/420*100}%;--width:${x[2]/420*100}%;--col:${x[4]}\" aria-label=\"${x[0]}, ${x[2]}밀리초\"><span class=\"label\">${x[3]?'↳ ':''}${x[0]}</span><span class=\"track\"><i></i></span></button>",
+   "<button class=\"span\" data-k=\"${i}\" style=\"--depth:${x[3]};--left:${x[1]/420*100}%;--width:${x[2]/420*100}%;--col:${x[4]}\" aria-label=\"${x[0]}，${x[2]} 毫秒\"><span class=\"label\">${x[3]?'↳ ':''}${x[0]}</span><span class=\"track\"><i></i></span></button>"
+  ]
+ ],
+ "demo": {}
+}

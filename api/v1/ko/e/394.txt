@@ -1,0 +1,67 @@
+<!-- Lucian UX/UI Prompt #394 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#394 -->
+<!--
+Element: 스크롤에 엇갈려 흐르는 문구 띠
+ID: 394 · Category: 스크롤 모션 · Tags: scroll, marquee, velocity, typography, banner
+What it does: 큰 문구 띠 세 줄이 서로 반대 방향으로 천천히 흐르다가, 스크롤하면 그 속도만큼 빨라지고 진행 방향으로 살짝 기웁니다. 위로 스크롤하면 흐르는 방향이 뒤집히고, 멈추면 다시 느긋한 속도로 돌아옵니다.
+How to use it: 카드 안쪽을 빠르게 위아래로 스크롤해 보세요
+Footprint: fixed size, square
+Needs: tokens.css (the --ux-* theme tokens and the .ux base). Map the tokens to the project's theme variables.
+Live demo: https://lucianlabs.dev/uxui-prompt/#394
+-->
+<style>
+.u394{position:relative;width:340px;height:330px;border-radius:28px;background:var(--ux-ink);box-shadow:0 30px 60px -36px var(--ux-shadow-strong);overflow:hidden;color:var(--ux-page)}
+.u394-sc{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;outline:none}
+.u394-sc::-webkit-scrollbar{display:none}
+.u394-run{height:2400px}
+.u394-st{position:sticky;top:0;height:330px;display:flex;flex-direction:column;justify-content:center;gap:8px;overflow:hidden}
+.u394-row{display:flex;white-space:nowrap;will-change:transform}
+.u394-row span{flex:none;padding-right:.3em;font-size:52px;line-height:1.05;font-weight:900;letter-spacing:-.04em}
+.u394-row:nth-child(2) span{font-size:30px;font-weight:800;color:var(--ux-accent);letter-spacing:-.03em}
+.u394-row:nth-child(3) span{color:transparent;-webkit-text-stroke:1.5px color-mix(in srgb,var(--ux-page) 70%,transparent)}
+.u394-hint{position:absolute;left:0;right:0;bottom:16px;text-align:center;font-size:11.5px;font-weight:750;color:color-mix(in srgb,var(--ux-page) 50%,transparent)}
+</style>
+<div class="ux u394">
+  <div class="u394-sc" tabindex="0" aria-label="움직이는 문구 띠, 스크롤로 속도 조절"><div class="u394-run"><div class="u394-st" aria-hidden="true"></div></div></div>
+  <span class="u394-hint" aria-hidden="true">스크롤해서 속도 바꾸기</span>
+</div>
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  var sc = root.querySelector('.u394-sc'), st = root.querySelector('.u394-st');
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ROWS = ['DESIGN · MOTION · CODE · ', '움직임으로 말하는 인터페이스 · ', 'LUCIAN LABS · 2026 · '];
+  var rows = ROWS.map(function (t, i) {
+    var r = document.createElement('div');
+    r.className = 'u394-row';
+    for (var k = 0; k < 4; k++) { var s = document.createElement('span'); s.textContent = t; r.appendChild(s); }
+    st.appendChild(r);
+    return { el: r, x: -Math.random() * 200, dir: i % 2 ? 1 : -1, w: 0 };
+  });
+  st.setAttribute('aria-label', ROWS.join(' '));
+  var lastY = 0, boost = 0, sign = 1, last = 0, vis = true, skew = 0;
+  sc.addEventListener('scroll', function () {
+    var dy = sc.scrollTop - lastY;
+    lastY = sc.scrollTop;
+    boost = Math.min(40, boost + Math.abs(dy) * 0.25);
+    if (dy) sign = dy > 0 ? 1 : -1;
+  }, { passive: true });
+  // 기본 흐름(초당 30px)에 스크롤 속도를 더하고, 스크롤 방향에 따라 흐름을 뒤집습니다
+  function frame(now) {
+    if (!root.isConnected) return;
+    var dt = Math.max(0, Math.min(50, now - (last || now))) / 16.7;
+    last = now;
+    boost *= Math.pow(0.92, dt);
+    skew += ((boost > 1 ? sign * Math.min(8, boost * 0.35) : 0) - skew) * 0.15 * dt;
+    rows.forEach(function (r) {
+      if (!r.w) r.w = r.el.firstChild.offsetWidth;
+      r.x += r.dir * sign * (0.5 + boost) * dt;
+      if (r.x < -r.w) r.x += r.w;
+      if (r.x > 0) r.x -= r.w;
+      r.el.style.transform = 'translateX(' + r.x.toFixed(1) + 'px) skewX(' + (-skew * r.dir).toFixed(2) + 'deg)';
+    });
+    if (vis && !rm) requestAnimationFrame(frame);
+  }
+  new IntersectionObserver(function (en) { var was = vis; vis = en[0].isIntersecting; if (vis && !was) requestAnimationFrame(frame); }).observe(root);
+  requestAnimationFrame(frame);
+})();
+</script>

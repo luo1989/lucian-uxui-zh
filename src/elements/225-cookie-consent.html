@@ -1,0 +1,105 @@
+<!-- @meta {"title":"한 입 베어 무는 쿠키 동의","category":"폼·입력","summary":"웹사이트 아래에서 쿠키 동의 배너가 올라옵니다. 설정을 누르면 배너가 위로 늘어나 필수·분석·마케팅 스위치가 나오고, 필수는 늘 켜져 잠겨 있습니다. 모두 허용이나 선택 저장을 누르면 쿠키 그림을 한 입 베어 문 자국이 생기고 부스러기가 떨어진 뒤 배너가 내려가며, 왼쪽 아래 작은 쿠키 버튼이 남아 언제든 설정을 다시 열 수 있습니다.","hint":"설정을 눌러 스위치를 바꾸고 저장해 본 뒤, 남은 쿠키 버튼으로 다시 열어 보세요","shape":"square","tags":["cookie","consent","banner","privacy","gdpr"]} -->
+<!-- @demo [["wait",1500],["tap",".u225-set",0,{"after":900}],["tap",".u225-sw",1,{"after":600}],["tap",".u225-sv",0,{"after":1900}],["tap",".u225-fab",0,{"after":1100}],["tap",".u225-all",0,{"after":1800}],["reset"]] -->
+<!-- @en {"title":"Cookie consent with a bite","summary":"A cookie consent banner rises from the bottom of a website. Press Settings and the banner grows upward to show Essential, Analytics and Marketing switches, with Essential always on and locked. Press Accept all or Save choices and a bite mark appears in the cookie as crumbs fall, then the banner slides away, leaving a small cookie button in the bottom left to reopen the settings any time.","hint":"Open Settings, flip a switch and save, then reopen with the leftover cookie button","map":[
+  [">쿠키를 써도 될까요?<", ">Can we use cookies?<"],
+  [">사이트를 더 편하게 쓰도록 돕는 데만 써요.<", ">Only to make the site easier to use.<"],
+  [">설정<", ">Settings<"],
+  [">모두 허용<", ">Accept all<"],
+  ["var CK = [['필수', '로그인과 장바구니 유지', 1], ['분석', '어떤 페이지가 유용한지 파악', 0], ['마케팅', '관심 있을 만한 소식 보여 주기', 0]]", "var CK = [['Essential', 'Keeps you signed in and your cart', 1], ['Analytics', 'Shows which pages help', 0], ['Marketing', 'Shows news you may like', 0]]"],
+  ["'항상 켜짐'", "'Always on'"],
+  [">선택 저장<", ">Save choices<"],
+  ["aria-label=\"쿠키 설정 다시 열기\"", "aria-label=\"Reopen cookie settings\""],
+  ["aria-label=\"쿠키 동의\"", "aria-label=\"Cookie consent\""]
+]} -->
+<style>
+.u225{position:relative;width:340px;height:340px;border-radius:30px;overflow:hidden;background:var(--ux-surface);box-shadow:0 0 0 1px var(--ux-line),0 30px 60px -36px var(--ux-shadow-strong);color:var(--ux-ink)}
+.u225-pg{position:absolute;inset:0;padding:22px 20px}
+.u225-pg i{display:block;border-radius:8px;background:var(--ux-surface-2);margin-bottom:9px}
+.u225-bn{position:absolute;left:12px;right:12px;bottom:12px;padding:14px;border-radius:20px;background:var(--ux-surface);box-shadow:0 0 0 1px var(--ux-line),0 20px 40px -14px var(--ux-shadow-strong);transform:translateY(130%);transition:transform .5s cubic-bezier(.3,1.25,.5,1)}
+.u225.is-on .u225-bn{transform:none}
+.u225.is-done .u225-bn{transform:translateY(130%);transition:transform .45s cubic-bezier(.5,0,.75,0) .55s}
+.u225-tp{display:flex;gap:11px;align-items:center}
+.u225-ck{position:relative;flex:none;width:44px;height:44px}
+.u225-ck svg{width:44px;height:44px;overflow:visible}
+.u225-bt circle.b{transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.u225.is-bite .u225-bt circle.b{transform:none}
+.u225-cr{position:absolute;right:2px;top:4px;width:4px;height:4px;border-radius:1px;background:#B45309;opacity:0}
+.u225.is-bite .u225-cr{animation:u225-cr .7s ease-in forwards}
+.u225-cr:nth-of-type(2){right:8px;width:3px;height:3px;animation-delay:.05s!important}
+.u225-cr:nth-of-type(3){right:-2px;top:9px;width:3px;height:3px;animation-delay:.1s!important}
+@keyframes u225-cr{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(6px,34px) rotate(160deg)}}
+.u225-tx b{display:block;font-size:13px;font-weight:900}
+.u225-tx span{display:block;margin-top:2px;font-size:10.5px;line-height:1.4;font-weight:650;color:var(--ux-ink-3)}
+.u225-ex{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.3,1,.4,1)}
+.u225-ex>div{min-height:0;overflow:hidden}
+.u225.is-x .u225-ex{grid-template-rows:1fr}
+.u225-rw{display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid var(--ux-line)}
+.u225-rw:first-child{margin-top:10px}
+.u225-rw div{flex:1;min-width:0}
+.u225-rw b{display:block;font-size:11.5px;font-weight:850}
+.u225-rw small{display:block;font-size:9.5px;font-weight:650;color:var(--ux-ink-3)}
+.u225-rw em{font-style:normal;font-size:9.5px;font-weight:800;color:var(--ux-ink-3)}
+.u225-sw{position:relative;flex:none;width:36px;height:22px;border:0;border-radius:11px;background:var(--ux-surface-3);cursor:pointer;transition:background .2s}
+.u225-sw::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .25s cubic-bezier(.3,1.5,.5,1)}
+.u225-sw[aria-checked="true"]{background:#10B981}
+.u225-sw[aria-checked="true"]::after{transform:translateX(14px)}
+.u225-sw:disabled{opacity:.55;cursor:not-allowed}
+.u225-bs{display:flex;gap:6px;margin-top:12px}
+.u225-bs button{flex:1;height:38px;border:0;border-radius:11px;font:inherit;font-size:12px;font-weight:850;cursor:pointer}
+.u225-set,.u225-sv{background:var(--ux-surface-2);color:var(--ux-ink);box-shadow:inset 0 0 0 1px var(--ux-line)}
+.u225-all{background:var(--ux-ink);color:var(--ux-surface)}
+.u225-sv{display:none}
+.u225.is-x .u225-set{display:none}
+.u225.is-x .u225-sv{display:block}
+.u225-fab{position:absolute;left:14px;bottom:14px;width:44px;height:44px;border:0;border-radius:50%;background:var(--ux-surface);box-shadow:0 0 0 1px var(--ux-line),0 10px 20px -10px var(--ux-shadow-strong);display:grid;place-items:center;cursor:pointer;transform:scale(0);transition:transform .4s cubic-bezier(.3,1.7,.5,1)}
+.u225.is-fab .u225-fab{transform:none}
+.u225-fab svg{width:26px;height:26px}
+.u225 button:focus-visible{outline:2px solid var(--ux-accent);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){.u225-bn,.u225.is-done .u225-bn,.u225-ex,.u225-fab,.u225-bt circle.b{transition:none}.u225.is-bite .u225-cr{animation:none}}
+</style>
+<div class="ux u225">
+  <div class="u225-pg" aria-hidden="true"><i style="height:22px;width:40%"></i><i style="height:120px"></i><i style="height:12px;width:90%"></i><i style="height:12px;width:76%"></i><i style="height:12px;width:84%"></i></div>
+  <div class="u225-bn" role="dialog" aria-label="쿠키 동의">
+    <div class="u225-tp"><span class="u225-ck" aria-hidden="true"></span><div class="u225-tx"><b>쿠키를 써도 될까요?</b><span>사이트를 더 편하게 쓰도록 돕는 데만 써요.</span></div></div>
+    <div class="u225-ex"><div class="u225-ls"></div></div>
+    <div class="u225-bs"><button type="button" class="u225-set">설정</button><button type="button" class="u225-sv">선택 저장</button><button type="button" class="u225-all">모두 허용</button></div>
+  </div>
+  <button type="button" class="u225-fab" aria-label="쿠키 설정 다시 열기" tabindex="-1"></button>
+</div>
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  var bn = root.querySelector('.u225-bn'), ck = root.querySelector('.u225-ck'), ls = root.querySelector('.u225-ls'), set = root.querySelector('.u225-set'), sv = root.querySelector('.u225-sv'), all = root.querySelector('.u225-all'), fab = root.querySelector('.u225-fab');
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var uid = 'u225' + Math.random().toString(36).slice(2, 7);
+  // 쿠키 그림: 오른쪽 위를 가리는 원 세 개(마스크)가 커지면 한 입 베어 문 모양이 됩니다
+  function cookie(id, bite) {
+    return '<svg viewBox="0 0 44 44"><defs><mask id="' + id + '" class="u225-bt"><rect width="44" height="44" fill="#fff"/>' + (bite ? '<circle class="b" cx="38" cy="7" r="9" fill="#000"/><circle class="b" cx="42" cy="17" r="6" fill="#000"/><circle class="b" cx="30" cy="2" r="6" fill="#000"/>' : '') + '</mask></defs><g mask="url(#' + id + ')"><circle cx="22" cy="22" r="19" fill="#F2B866"/><circle cx="22" cy="22" r="19" fill="none" stroke="#D97706" stroke-width="2"/><circle cx="15" cy="16" r="3" fill="#78350F"/><circle cx="26" cy="27" r="3.2" fill="#78350F"/><circle cx="14" cy="29" r="2.2" fill="#78350F"/><circle cx="29" cy="15" r="2" fill="#78350F"/></g></svg>';
+  }
+  ck.innerHTML = cookie(uid + 'a', true) + '<i class="u225-cr"></i><i class="u225-cr"></i><i class="u225-cr"></i>';
+  fab.innerHTML = cookie(uid + 'b', false).replace('<svg ', '<svg aria-hidden="true" ');
+  var CK = [['필수', '로그인과 장바구니 유지', 1], ['분석', '어떤 페이지가 유용한지 파악', 0], ['마케팅', '관심 있을 만한 소식 보여 주기', 0]];
+  var on = CK.map(function (c) { return !!c[2]; });
+  var S = CK.map(function (c, i) {
+    var r = document.createElement('div'); r.className = 'u225-rw';
+    r.innerHTML = '<div><b></b><small></small></div>' + (c[2] ? '<em></em>' : '') + '<button type="button" class="u225-sw" role="switch"></button>';
+    r.querySelector('b').textContent = c[0]; r.querySelector('small').textContent = c[1]; if (c[2]) r.querySelector('em').textContent = '항상 켜짐';
+    var b = r.querySelector('button'); b.setAttribute('aria-label', c[0]); if (c[2]) b.disabled = true;
+    b.addEventListener('click', function () { on[i] = !on[i]; sync(); });
+    ls.appendChild(r); return b;
+  });
+  function sync() { S.forEach(function (b, i) { b.setAttribute('aria-checked', on[i]); }); }
+  function expand(v) { root.classList.toggle('is-x', v); }
+  // 저장하면 한 입 베어 물고, 부스러기가 떨어진 뒤 배너가 내려가 작은 쿠키 버튼만 남습니다
+  function done() {
+    root.classList.remove('is-bite'); void root.offsetWidth; root.classList.add('is-bite', 'is-done');
+    setTimeout(function () { root.classList.remove('is-on', 'is-done', 'is-x'); root.classList.add('is-fab'); fab.tabIndex = 0; fab.focus({ preventScroll: true }); }, rm ? 0 : 1050);
+  }
+  set.addEventListener('click', function () { expand(true); S[1].focus({ preventScroll: true }); });
+  sv.addEventListener('click', done);
+  all.addEventListener('click', function () { on = on.map(function () { return true; }); sync(); done(); });
+  fab.addEventListener('click', function () { root.classList.remove('is-fab', 'is-bite'); fab.tabIndex = -1; root.classList.add('is-on'); expand(true); setTimeout(function () { S[1].focus({ preventScroll: true }); }, 300); });
+  sync();
+  setTimeout(function () { root.classList.add('is-on'); }, rm ? 0 : 600);
+})();
+</script>

@@ -1,0 +1,85 @@
+<!-- @meta {"title":"도장이 쌓이는 커피 쿠폰","category":"프로모션·보상","summary":"열 칸짜리 커피 쿠폰에 도장을 찍으면 고무도장이 위에서 내려와 꾹 눌렀다 들리고, 잉크가 살짝 번진 원형 도장이 비스듬히 남습니다. 칸이 찰수록 아래 진행 막대가 차오르고, 열 번째 도장을 찍으면 쿠폰이 뒤집히며 무료 음료 한 잔 보상이 나타납니다.","hint":"도장 찍기를 여러 번 눌러 열 칸을 채워 보세요","shape":"square","tags":["stamp","loyalty","reward","coupon","progress"]} -->
+<!-- @demo [["wait",800],["tap",".u353-go",0,{"after":700}],["tap",".u353-go",0,{"after":700}],["tap",".u353-go",0,{"after":700}],["tap",".u353-go",0,{"after":2600}],["tap",".u353-go",0,{"after":900}],["tap",".u353-go",0,{"after":800}]] -->
+<!-- @en {"title":"Stamp-collecting coffee card","summary":"Stamp a ten-slot coffee card and a rubber stamp comes down from above, presses firmly and lifts, leaving a round stamp at a slight angle with a touch of ink bleed. The progress bar below fills as slots do, and the tenth stamp flips the card over to reveal a free drink reward.","hint":"Press Stamp several times to fill all ten slots","map":[
+  [">루시안 커피<", ">Lucian Coffee<"],
+  [">열 번 마시면 한 잔 무료<", ">Buy ten, get one free<"],
+  [">도장 찍기<", ">Stamp<"],
+  ["'새 쿠폰'", "'New card'"],
+  ["'도장 찍기'", "'Stamp'"],
+  [">무료 음료 한 잔<", ">One free drink<"],
+  [">카운터에서 이 화면을 보여 주세요<", ">Show this screen at the counter<"],
+  ["'/10 모음'", "'/10 collected'"]
+]} -->
+<style>
+.u353{position:relative;width:340px;height:340px;border-radius:30px;overflow:hidden;background:linear-gradient(170deg,#F4EDE4,#E6D5C3);box-shadow:0 0 0 1px var(--ux-line),0 30px 60px -36px var(--ux-shadow-strong);color:#3E2A1E}
+.u353-cd{position:absolute;left:24px;right:24px;top:30px;height:206px;perspective:900px}
+.u353-in{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.4,1.3,.5,1)}
+.u353.is-done .u353-in{transform:rotateY(180deg)}
+.u353-fr,.u353-bk{position:absolute;inset:0;border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 16px 30px -16px rgba(62,42,30,.55)}
+.u353-fr{background:#FFFBF4;padding:16px 18px;display:flex;flex-direction:column}
+.u353-fr::before{content:"";position:absolute;right:0;top:0;bottom:0;width:30px;border-radius:0 20px 20px 0;background:repeating-linear-gradient(#C08552 0 6px,#A86E3E 6px 12px);opacity:.2}
+.u353-tt b{display:block;font-size:16px;font-weight:900;letter-spacing:-.01em}
+.u353-tt span{font-size:10.5px;font-weight:700;color:#9C7B62}
+.u353-gd{margin-top:12px;display:grid;grid-template-columns:repeat(5,1fr);gap:9px;padding-right:22px}
+.u353-sl{position:relative;aspect-ratio:1;border-radius:50%;border:2px dashed #D9C4AE;display:grid;place-items:center}
+.u353-sl svg{width:58%;height:58%;opacity:.25}
+.u353-ink{position:absolute;inset:-4px;border-radius:50%;opacity:0;transform:rotate(var(--r)) scale(1.4)}
+.u353-ink.is-on{opacity:1;transform:rotate(var(--r)) scale(1);transition:transform .12s ease-out,opacity .08s}
+.u353-ink svg{width:100%;height:100%;opacity:1}
+.u353-bk{transform:rotateY(180deg);background:radial-gradient(circle at 30% 20%,#FFE8CC,#FFD8A8);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}
+.u353-bk svg{width:60px;height:60px}
+.u353-bk b{font-size:20px;font-weight:900}
+.u353-bk span{font-size:11px;font-weight:700;color:#9C5A1E}
+.u353-stp{position:absolute;left:0;top:0;width:54px;height:70px;pointer-events:none;opacity:0;filter:drop-shadow(0 10px 8px rgba(0,0,0,.25))}
+.u353-ft{position:absolute;left:24px;right:24px;bottom:24px;display:flex;align-items:center;gap:12px}
+.u353-bar{flex:1;height:8px;border-radius:4px;background:rgba(62,42,30,.12);overflow:hidden}
+.u353-bar i{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,#C2410C,#F08C00);transition:width .45s cubic-bezier(.3,1.3,.5,1)}
+.u353-n{font-size:11.5px;font-weight:800;font-variant-numeric:tabular-nums;min-width:70px}
+.u353-go{border:0;padding:9px 16px;border-radius:999px;background:#3E2A1E;color:#FFFBF4;font:inherit;font-size:12.5px;font-weight:850;cursor:pointer;white-space:nowrap}
+.u353-go:focus-visible{outline:2px solid #3E2A1E;outline-offset:3px}
+</style>
+<div class="ux u353">
+  <div class="u353-cd"><div class="u353-in">
+    <div class="u353-fr"><div class="u353-tt"><b>루시안 커피</b><span>열 번 마시면 한 잔 무료</span></div><div class="u353-gd"></div></div>
+    <div class="u353-bk" aria-live="polite"><svg viewBox="0 0 60 60" aria-hidden="true"><path d="M14 22h28v16a12 12 0 0 1-12 12h-4a12 12 0 0 1-12-12z" fill="#fff" stroke="#3E2A1E" stroke-width="3"/><path d="M42 26h4a6 6 0 0 1 0 12h-4" fill="none" stroke="#3E2A1E" stroke-width="3"/><path d="M22 8q4 4 0 8M30 6q4 4 0 8" stroke="#C2410C" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg><b>무료 음료 한 잔</b><span>카운터에서 이 화면을 보여 주세요</span></div>
+  </div></div>
+  <svg class="u353-stp" viewBox="0 0 54 70" aria-hidden="true"><rect x="19" y="0" width="16" height="30" rx="7" fill="#8C5A33"/><rect x="10" y="28" width="34" height="14" rx="4" fill="#A86E3E"/><rect x="6" y="40" width="42" height="12" rx="3" fill="#C2410C"/></svg>
+  <div class="u353-ft"><span class="u353-n" aria-live="polite"></span><span class="u353-bar"><i></i></span><button type="button" class="u353-go">도장 찍기</button></div>
+</div>
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  var gd = root.querySelector('.u353-gd'), stp = root.querySelector('.u353-stp'), go = root.querySelector('.u353-go'), bar = root.querySelector('.u353-bar i'), num = root.querySelector('.u353-n');
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var CUP = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z" fill="none" stroke="#3E2A1E" stroke-width="2"/><path d="M16 11h2a2.5 2.5 0 0 1 0 5h-2" fill="none" stroke="#3E2A1E" stroke-width="2"/></svg>';
+  // 찍힌 도장: 테두리가 살짝 거친 원 + 가운데 컵 + 둘레 글자
+  var INK = '<svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="26" fill="none" stroke="#D9480F" stroke-width="3" stroke-dasharray="40 2 30 3 50 2"/><circle cx="30" cy="30" r="20" fill="none" stroke="#D9480F" stroke-width="1.4"/><path d="M20 26h16v7a7 7 0 0 1-7 7h-2a7 7 0 0 1-7-7z" fill="#D9480F" opacity=".9"/><path d="M36 28h3a3.5 3.5 0 0 1 0 7h-3" fill="none" stroke="#D9480F" stroke-width="2.4"/><text x="30" y="17" text-anchor="middle" font-size="5.5" font-weight="900" fill="#D9480F" font-family="system-ui" letter-spacing="1">LUCIAN</text></svg>';
+  var S = [], n = 0, busy = false;
+  for (var i = 0; i < 10; i++) { var sl = document.createElement('div'); sl.className = 'u353-sl'; sl.innerHTML = CUP + '<span class="u353-ink" style="--r:' + ((Math.random() - 0.5) * 34).toFixed(0) + 'deg">' + INK + '</span>'; gd.appendChild(sl); S.push(sl); }
+  function info() { num.textContent = n + '/10 모음'; bar.style.width = (n * 10) + '%'; go.textContent = n >= 10 ? '새 쿠폰' : '도장 찍기'; }
+  // 도장 내려오기 → 꾹(찌그러짐) → 잉크 남기고 들어 올림
+  function stamp() {
+    if (busy) return;
+    if (n >= 10) { root.classList.remove('is-done'); n = 0; S.forEach(function (s) { s.querySelector('.u353-ink').classList.remove('is-on'); }); info(); return; }
+    busy = true;
+    var sl = S[n], r = sl.getBoundingClientRect(), rb = root.getBoundingClientRect(), k = root.offsetWidth / (rb.width || 1);
+    var x = (r.left - rb.left) * k + r.width * k / 2 - 27, y = (r.top - rb.top) * k + r.height * k / 2 - 64;
+    var ink = sl.querySelector('.u353-ink');
+    function land() { ink.classList.add('is-on'); n++; info(); if (n >= 10) setTimeout(function () { root.classList.add('is-done'); }, rm ? 0 : 450); }
+    if (rm || !stp.animate) { land(); busy = false; return; }
+    stp.style.opacity = '1';
+    stp.animate([
+      { transform: 'translate(' + (x + 20) + 'px,' + (y - 60) + 'px) scale(1.25) rotate(8deg)', opacity: 0 },
+      { transform: 'translate(' + x + 'px,' + (y - 10) + 'px) scale(1.1)', opacity: 1, offset: 0.4 },
+      { transform: 'translate(' + x + 'px,' + (y + 2) + 'px) scale(1.04,.92)', offset: 0.55 },
+      { transform: 'translate(' + x + 'px,' + (y - 50) + 'px) scale(1.15)', opacity: 1, offset: 0.85 },
+      { transform: 'translate(' + (x - 10) + 'px,' + (y - 70) + 'px) scale(1.2)', opacity: 0 }
+    ], { duration: 560, easing: 'ease-in-out' }).onfinish = function () { stp.style.opacity = '0'; busy = false; };
+    setTimeout(land, 300);
+  }
+  go.addEventListener('click', stamp);
+  // 단골손님처럼 이미 여섯 칸이 찍힌 쿠폰에서 시작합니다
+  for (n = 0; n < 6; n++) S[n].querySelector('.u353-ink').classList.add('is-on');
+  info();
+})();
+</script>

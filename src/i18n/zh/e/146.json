@@ -1,0 +1,35 @@
+{
+ "id": "146",
+ "title": "JSON 值树编辑",
+ "summary": "把嵌套的 JSON 展开成树、就地改值的编辑器。字符串、数字和布尔值各用合适的输入方式打开，类型不会变。",
+ "hint": "改一下 name 的值，或点 live 切换真假",
+ "kw": [
+  "JSON",
+  "树形编辑",
+  "嵌套结构",
+  "布尔值",
+  "就地编辑",
+  "数据编辑",
+  "配置",
+  "类型"
+ ],
+ "map": [
+  [
+   "project 속성 접기",
+   "折叠 project 属性"
+  ],
+  [
+   "project.name 문자열",
+   "project.name 字符串"
+  ],
+  [
+   "project.stars 숫자",
+   "project.stars 数字"
+  ],
+  [
+   "project.live 참 거짓",
+   "project.live 布尔值"
+  ]
+ ],
+ "demo": {}
+}

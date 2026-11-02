@@ -1,0 +1,58 @@
+<!-- @meta {"title":"커서에서 퍼지는 점 격자 파동","category":"히어로·배경","summary":"가지런한 점 격자 위로 커서를 움직이면 지나간 자리마다 작은 물결이 동심원으로 퍼지며 점들이 부풀었다 가라앉고 색이 번집니다. 누르면 큰 파동이 터져 격자 전체를 가로지르고, 여러 물결이 만나는 곳에서는 서로 겹쳐 더 크게 출렁입니다.","hint":"점 위로 커서를 움직이고, 눌러서 큰 파동을 보내 보세요","shape":"square","tags":["dot-grid","wave","interference","canvas","background"]} -->
+<!-- @demo [["wait",800],["glide",".u363-cv",0,[0.15,0.5],[0.85,0.5],1500,{"after":500}],["tap",".u363-cv",0,{"fx":0.3,"fy":0.3,"after":1400}],["tap",".u363-cv",0,{"fx":0.72,"fy":0.68,"after":1700}],["glide",".u363-cv",0,[0.8,0.2],[0.2,0.85],1300,{"after":900}]] -->
+<!-- @en {"title":"Dot grid waves from the cursor","summary":"Move the cursor over a tidy grid of dots and small ripples spread in rings from each spot you pass, the dots swelling, settling and blooming in color. Press to fire a big wave across the whole grid, and where several ripples meet they stack into larger swells.","hint":"Move the cursor over the dots, and press to send a big wave","map":[
+  ["aria-label=\"점 격자, 눌러서 파동 보내기\"", "aria-label=\"Dot grid, press to send a wave\""]
+]} -->
+<style>
+.u363{position:relative;width:340px;height:330px;border-radius:30px;overflow:hidden;background:var(--ux-surface);box-shadow:0 0 0 1px var(--ux-line),0 30px 60px -36px var(--ux-shadow-strong)}
+.u363-cv{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+</style>
+<div class="ux u363"><canvas class="u363-cv" role="img" aria-label="점 격자, 눌러서 파동 보내기"></canvas></div>
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  var cv = root.querySelector('.u363-cv'), cx = cv.getContext('2d');
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W = 340, H = 330, dpr = Math.min(2, window.devicePixelRatio || 1), GAP = 17;
+  cv.width = W * dpr; cv.height = H * dpr; cx.scale(dpr, dpr);
+  var dots = [];
+  for (var y = GAP; y < H - 4; y += GAP) for (var x = GAP; x < W - 4; x += GAP) dots.push([x, y]);
+  // 물결 하나 = 시작 자리, 시작 시각, 세기. 바깥으로 초속 170px로 퍼지며 시간과 거리에 따라 약해집니다
+  var waves = [], lastAdd = 0;
+  function add(x, y, a) { waves.push({ x: x, y: y, t: performance.now(), a: a }); if (waves.length > 14) waves.shift(); }
+  function draw(now) {
+    // 쉬고 있는 점은 테마의 옅은 글자색을 따릅니다(밝은·어두운 테마 모두)
+    var idle = getComputedStyle(root).getPropertyValue('--ux-ink-3').trim() || '#868E96';
+    cx.clearRect(0, 0, W, H);
+    waves = waves.filter(function (w) { return now - w.t < 2600; });
+    dots.forEach(function (d) {
+      var h = 0;
+      waves.forEach(function (w) {
+        var age = (now - w.t) / 1000, dist = Math.hypot(d[0] - w.x, d[1] - w.y), front = age * 170, k = dist - front;
+        if (k > 0 || k < -90) return;
+        h += Math.sin(k / 14) * Math.exp(k / 60) * w.a * Math.exp(-age * 1.3);
+      });
+      var m = Math.max(-1, Math.min(1.6, h)), r = 1.6 + Math.max(0, m) * 3.4;
+      var hue = 230 - Math.max(0, m) * 110;
+      var calm = Math.abs(m) < 0.04;
+      cx.globalAlpha = calm ? 0.55 : 1;
+      cx.fillStyle = calm ? idle : 'hsl(' + hue.toFixed(0) + ' 85% ' + (58 - Math.min(0, m) * 10).toFixed(0) + '%)';
+      cx.beginPath(); cx.arc(d[0], d[1] - m * 3, r, 0, 6.2832); cx.fill();
+    });
+    cx.globalAlpha = 1;
+  }
+  var vis = true, raf = 0;
+  function frame(now) {
+    raf = 0;
+    if (!root.isConnected || !vis) return;
+    draw(now);
+    raf = requestAnimationFrame(frame);
+  }
+  function run() { if (rm) { draw(performance.now()); return; } if (!raf && vis) raf = requestAnimationFrame(frame); }
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { vis = es[0].isIntersecting; run(); }).observe(root);
+  function loc(e) { var r = cv.getBoundingClientRect(), k = cv.offsetWidth / (r.width || 1); return [(e.clientX - r.left) * k, (e.clientY - r.top) * k]; }
+  cv.addEventListener('pointermove', function (e) { var now = performance.now(); if (now - lastAdd < 110) return; lastAdd = now; var q = loc(e); add(q[0], q[1], 0.55); if (rm) draw(now + 300); });
+  cv.addEventListener('pointerdown', function (e) { var q = loc(e); add(q[0], q[1], 1.6); if (rm) draw(performance.now() + 500); });
+  run();
+})();
+</script>

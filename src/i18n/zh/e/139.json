@@ -1,0 +1,45 @@
+{
+ "id": "139",
+ "title": "页边批注",
+ "summary": "给每个句子在页边挂一条批注的注释编辑器。点句子末尾的标记就能打开它的批注，输入的内容会一直跟着那句话。",
+ "hint": "点句子末尾的 ＋ 打开批注，写点东西",
+ "kw": [
+  "批注",
+  "注释",
+  "页边",
+  "笔记",
+  "文档",
+  "句子",
+  "标注",
+  "编辑"
+ ],
+ "map": [
+  [
+   "도시의 작은 숲",
+   "城市里的小森林"
+  ],
+  [
+   "지붕 위 정원은 빗물을 잠시 머금는다.",
+   "屋顶花园会暂时留住雨水。"
+  ],
+  [
+   "그늘은 여름의 온도를 낮춘다.",
+   "树荫能降低夏天的温度。"
+  ],
+  [
+   "선택 문장 주석",
+   "所选句子的批注"
+  ],
+  [
+   "배수 구조를 함께 확인",
+   "一起检查排水结构"
+  ],
+  [
+   ":'&#39;'}[c]));const motion=(node,frames,opts={})=>{if(node?.animate&&!matchMedia('(prefers-reduced-motion:reduce)').matches)node.animate(frames,{duration:220,easing:'cubic-bezier(.2,.8,.2,1)',...opts})};let notes=['배수 구조를 함께 확인',''],active=null;function render(){$$('[data-anchor]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.anchor===active)));$('.margin').hidden=active===null;if(active!==null)$('textarea').value=notes[active];root.dataset.notes=JSON.stringify(notes)}$$('[data-anchor]').forEach(b=>b.onclick=()=>{active=active===+b.dataset.anchor?null:+b.dataset.anchor;render();if(active!==null){$('textarea').focus();motion($('.margin'),[{transform:'translateY(-5px)',opacity:.6},{transform:'none',opacity:1}])}});$('textarea').oninput=()=>{notes[active]=$('textarea').value;root.dataset.notes=JSON.stringify(notes)};$('textarea').onkeydown=e=>{if(e.key==='Escape'){const b=$('[data-anchor=",
+   ":'&#39;'}[c]));const motion=(node,frames,opts={})=>{if(node?.animate&&!matchMedia('(prefers-reduced-motion:reduce)').matches)node.animate(frames,{duration:220,easing:'cubic-bezier(.2,.8,.2,1)',...opts})};let notes=['一起检查排水结构',''],active=null;function render(){$$('[data-anchor]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.anchor===active)));$('.margin').hidden=active===null;if(active!==null)$('textarea').value=notes[active];root.dataset.notes=JSON.stringify(notes)}$$('[data-anchor]').forEach(b=>b.onclick=()=>{active=active===+b.dataset.anchor?null:+b.dataset.anchor;render();if(active!==null){$('textarea').focus();motion($('.margin'),[{transform:'translateY(-5px)',opacity:.6},{transform:'none',opacity:1}])}});$('textarea').oninput=()=>{notes[active]=$('textarea').value;root.dataset.notes=JSON.stringify(notes)};$('textarea').onkeydown=e=>{if(e.key==='Escape'){const b=$('[data-anchor="
+  ]
+ ],
+ "demo": {
+  "그늘 면적 기록": "记录树荫面积"
+ }
+}

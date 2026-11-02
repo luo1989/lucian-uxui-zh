@@ -1,0 +1,59 @@
+{
+  "_comment": "人工补译/改写：仅用于韩文助词、以及需要整句改写的组件（与上游 @en 的做法一致）。map 里是整段代码片段替换，tr 里按工作单索引覆盖译文（空字符串表示删除该助词）。",
+  "092": {
+    "_why": "韩文助词 jo() 在中文里没有对应，整句改写才自然",
+    "tr": {},
+    "map": [
+      [
+        "typo.textContent = '‘' + fix + '’' + jo(fix, '으로', '로', true) + ' 찾기';",
+        "typo.textContent = '搜索「' + fix + '」';"
+      ],
+      [
+        "nt.textContent = '조건에 맞는 ' + w + jo(w, '이', '가') + ' 없어요';",
+        "nt.textContent = '没有符合这些筛选的「' + w + '」';"
+      ],
+      [
+        "nt.textContent = '‘' + raw + '’' + jo(raw, '과', '와') + ' 맞는 상품이 없어요';",
+        "nt.textContent = '没有与「' + raw + '」匹配的商品';"
+      ]
+    ]
+  },
+  "097": {
+    "_why": "'전체 … 중' 是韩文语序，中文改成 '占总计 …'",
+    "tr": {},
+    "map": [
+      [
+        "'전체 ' + won(D.reduce(function (s, d) { return s + d[1]; }, 0)) + ' 중'",
+        "'占总计 ' + won(D.reduce(function (s, d) { return s + d[1]; }, 0))"
+      ]
+    ]
+  },
+  "253": {
+    "_why": "购买播报里的宾格助词（을/를）中文不需要，删除即可",
+    "tr": {
+      "7": "",
+      "11": ""
+    },
+    "map": []
+  },
+  "129": {
+    "_why": "提取器被正则字面量里的引号干扰，漏掉了 '개 함수 펼침'，整句改写",
+    "tr": {},
+    "map": [
+      [
+        "$('[data-state]').textContent=open+'개 함수 펼침'",
+        "$('[data-state]').textContent=open+' 个函数已展开'"
+      ]
+    ]
+  },
+  "138": {
+    "_why": "同上，'개 가림' 需要整句改写",
+    "tr": {},
+    "map": [
+      [
+        "$('[data-state]').textContent=$$('[aria-pressed=\"true\"]').length+'개 가림'",
+        "$('[data-state]').textContent=$$('[aria-pressed=\"true\"]').length+' 项已遮盖'"
+      ]
+    ]
+  }
+}

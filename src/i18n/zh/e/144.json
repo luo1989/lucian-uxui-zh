@@ -1,0 +1,35 @@
+{
+ "id": "144",
+ "title": "列顺序编辑",
+ "summary": "可以隐藏表格列、或把列往前移的列编辑器。点列标题会弹出小菜单，选好动作后表格立刻重绘。",
+ "hint": "点列标题，试着隐藏它或把它往前移",
+ "kw": [
+  "表格列",
+  "列排序",
+  "隐藏列",
+  "列编辑",
+  "表头菜单",
+  "数据表",
+  "列管理",
+  "调整顺序"
+ ],
+ "map": [
+  [
+   "열 편집 결과",
+   "列编辑结果"
+  ],
+  [
+   "앞으로 이동",
+   "向前移动"
+  ],
+  [
+   "열 숨기기",
+   "隐藏列"
+  ],
+  [
+   ":'&#39;'}[c]));const motion=(node,frames,opts={})=>{if(node?.animate&&!matchMedia('(prefers-reduced-motion:reduce)').matches)node.animate(frames,{duration:220,easing:'cubic-bezier(.2,.8,.2,1)',...opts})};const titles={name:'이름',role:'역할',city:'지역'},rows=[{name:'서윤',role:'디자인',city:'서울'},{name:'지호',role:'개발',city:'부산'},{name:'민서',role:'기획',city:'제주'}];let order=['name','role','city'],visible=new Set(order),active=null;function close(){$('.menu').hidden=true;active=null}function render(){const cols=order.filter(k=>visible.has(k));$('table').innerHTML='<thead><tr>'+cols.map(k=>'<th><button data-header=",
+   ":'&#39;'}[c]));const motion=(node,frames,opts={})=>{if(node?.animate&&!matchMedia('(prefers-reduced-motion:reduce)').matches)node.animate(frames,{duration:220,easing:'cubic-bezier(.2,.8,.2,1)',...opts})};const titles={name:'姓名',role:'角色',city:'地区'},rows=[{name:'瑞允',role:'设计',city:'首尔'},{name:'智浩',role:'研发',city:'釜山'},{name:'敏书',role:'策划',city:'济州'}];let order=['name','role','city'],visible=new Set(order),active=null;function close(){$('.menu').hidden=true;active=null}function render(){const cols=order.filter(k=>visible.has(k));$('table').innerHTML='<thead><tr>'+cols.map(k=>'<th><button data-header="
+  ]
+ ],
+ "demo": {}
+}

@@ -1,0 +1,67 @@
+<!-- @meta {"title":"본문을 따라오는 목차 표시","category":"내비게이션","summary":"본문을 스크롤하면 오른쪽 목차에서 지금 읽는 장이 진해지고, 세로 표시 막대가 그 장이 화면에 걸친 만큼 늘었다 줄며 따라갑니다. 두 장이 함께 보일 때는 막대가 두 장에 걸쳐 늘어나고, 목차를 누르면 그 장으로 부드럽게 스크롤됩니다.","hint":"왼쪽 본문을 스크롤하거나 오른쪽 목차 항목을 눌러 보세요","shape":"square","tags":["scroll","toc","scrollspy","navigation","docs"]} -->
+<!-- @demo [["wait",800],["scroll",".u275-sc",0,200,1300],["wait",600],["scroll",".u275-sc",0,260,1300],["wait",700],["tap",".u275-ti",4,{"after":1500}],["tap",".u275-ti",1,{"after":1400}],["scroll",".u275-sc",0,"top",1200],["wait",500]] -->
+<!-- @en {"title":"Scroll-following table of contents","summary":"Scroll the body and the chapter you are reading darkens in the table of contents on the right, while a vertical marker grows and shrinks to cover however much of that chapter is on screen. When two chapters are visible the marker spans both, and pressing an entry scrolls smoothly to that chapter.","hint":"Scroll the body on the left, or press an entry in the contents on the right","map":[
+  ["var SEC = [['시작하기', '설치는 한 줄이면 됩니다. 명령을 실행하면 필요한 파일이 프로젝트에 추가되고, 기본 설정이 함께 만들어집니다.'], ['테마', '라이트와 다크 두 벌의 색 토큰을 씁니다. 프로젝트의 변수에 연결하면 그대로 따라 바뀝니다.'], ['컴포넌트', '버튼, 입력, 메뉴처럼 자주 쓰는 조각을 모아 두었습니다. 필요한 것만 골라 가져가세요.'], ['접근성', '모든 요소는 키보드로 조작할 수 있고, 화면 읽기 프로그램을 위한 이름을 갖고 있습니다.'], ['배포', '빌드 결과는 정적 파일입니다. 어떤 호스팅에도 그대로 올릴 수 있습니다.']];", "var SEC = [['Getting started', 'Installing takes a single line. Run the command and the files you need are added to your project along with a default config.'], ['Theming', 'It uses two sets of color tokens, light and dark. Map them to your project’s variables and they follow along.'], ['Components', 'Common pieces like buttons, inputs and menus are collected here. Take only the ones you need.'], ['Accessibility', 'Every element works with the keyboard and carries names for screen readers.'], ['Deploying', 'The build output is static files. Upload them to any host as they are.']];"],
+  ["aria-label=\"문서 본문\"", "aria-label=\"Document body\""],
+  ["aria-label=\"목차\"", "aria-label=\"Contents\""],
+  [">이 문서에서<", ">On this page<"]
+]} -->
+<style>
+.u275{position:relative;width:340px;height:330px;display:flex;border-radius:28px;background:var(--ux-surface);box-shadow:0 0 0 1px var(--ux-line),0 30px 60px -36px var(--ux-shadow-strong);overflow:hidden}
+.u275-sc{position:relative;flex:1;overflow-y:auto;padding:14px 12px 120px 18px;scrollbar-width:none;outline:none}
+.u275-sc::-webkit-scrollbar{display:none}
+.u275-sec{padding:8px 0 14px}
+.u275-sec h4{margin:0;font-size:16px;font-weight:850;letter-spacing:-.02em}
+.u275-sec p{margin:6px 0 0;font-size:13px;line-height:1.65;color:var(--ux-ink-2)}
+.u275-sec i{display:block;height:60px;margin-top:8px;border-radius:10px;background:repeating-linear-gradient(90deg,var(--ux-surface-2) 0 46%,transparent 46% 50%)}
+.u275-toc{position:relative;flex:none;width:118px;padding:16px 12px 16px 16px;border-left:1px solid var(--ux-line)}
+.u275-toc p{margin:0 0 8px;font-size:11px;font-weight:750;color:var(--ux-ink-3)}
+.u275-ul{position:relative;margin:0;padding:0 0 0 10px;list-style:none}
+.u275-ul::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;border-radius:2px;background:var(--ux-line)}
+.u275-ti{display:block;width:100%;padding:6px 0;border:0;background:none;text-align:left;font-size:12.5px;font-weight:650;color:var(--ux-ink-3);transition:color .25s}
+.u275-ti.on{color:var(--ux-ink);font-weight:800}
+.u275-mk{position:absolute;left:0;top:0;width:2px;border-radius:2px;background:var(--ux-accent);transition:transform .35s var(--ux-spring),height .35s var(--ux-spring)}
+</style>
+<div class="ux u275">
+  <div class="u275-sc" tabindex="0" aria-label="문서 본문"></div>
+  <nav class="u275-toc" aria-label="목차"><p>이 문서에서</p><ul class="u275-ul"><span class="u275-mk" aria-hidden="true"></span></ul></nav>
+</div>
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  var sc = root.querySelector('.u275-sc'), ul = root.querySelector('.u275-ul'), mk = root.querySelector('.u275-mk');
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var SEC = [['시작하기', '설치는 한 줄이면 됩니다. 명령을 실행하면 필요한 파일이 프로젝트에 추가되고, 기본 설정이 함께 만들어집니다.'], ['테마', '라이트와 다크 두 벌의 색 토큰을 씁니다. 프로젝트의 변수에 연결하면 그대로 따라 바뀝니다.'], ['컴포넌트', '버튼, 입력, 메뉴처럼 자주 쓰는 조각을 모아 두었습니다. 필요한 것만 골라 가져가세요.'], ['접근성', '모든 요소는 키보드로 조작할 수 있고, 화면 읽기 프로그램을 위한 이름을 갖고 있습니다.'], ['배포', '빌드 결과는 정적 파일입니다. 어떤 호스팅에도 그대로 올릴 수 있습니다.']];
+  var secs = [], items = [];
+  SEC.forEach(function (s, i) {
+    var el = document.createElement('section');
+    el.className = 'u275-sec';
+    el.innerHTML = '<h4></h4><p></p>' + (i % 2 ? '' : '<i aria-hidden="true"></i>');
+    el.querySelector('h4').textContent = s[0];
+    el.querySelector('p').textContent = s[1];
+    sc.appendChild(el); secs.push(el);
+    var li = document.createElement('li'), b = document.createElement('button');
+    b.type = 'button'; b.className = 'u275-ti'; b.textContent = s[0];
+    b.addEventListener('click', function () { sc.scrollTo({ top: el.offsetTop - 6, behavior: rm ? 'auto' : 'smooth' }); });
+    li.appendChild(b); ul.appendChild(li); items.push(b);
+  });
+  var raf = 0;
+  // 장마다 화면에 보이는 비율을 재서, 보이는 장 목차 항목들 위로 막대를 걸칩니다
+  function draw() {
+    raf = 0;
+    var top = sc.scrollTop, bot = top + sc.clientHeight, first = -1, last = -1, best = -1, bestV = 0;
+    secs.forEach(function (s, i) {
+      var a = s.offsetTop, b = a + s.offsetHeight, vis = Math.max(0, Math.min(b, bot) - Math.max(a, top)) / s.offsetHeight;
+      if (vis > 0.12) { if (first < 0) first = i; last = i; }
+      if (vis > bestV) { bestV = vis; best = i; }
+    });
+    if (first < 0) first = last = Math.max(0, best);
+    items.forEach(function (b, i) { b.classList.toggle('on', i === best); if (i === best) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+    var y0 = items[first].parentNode.offsetTop, y1 = items[last].parentNode.offsetTop + items[last].parentNode.offsetHeight;
+    mk.style.transform = 'translateY(' + y0 + 'px)';
+    mk.style.height = (y1 - y0) + 'px';
+  }
+  sc.addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(draw); }, { passive: true });
+  requestAnimationFrame(draw);
+})();
+</script>

@@ -1,0 +1,53 @@
+<!-- @meta {"title":"커서 빛이 번지는 카드 테두리","category":"커서·호버","summary":"어두운 화면의 기능 카드 네 장 위로 커서를 움직이면, 커서를 중심으로 한 은은한 빛이 카드 테두리를 따라 번지고 카드 안쪽도 살짝 밝아집니다. 빛은 카드 사이 틈을 건너 이웃 카드의 가장자리까지 함께 물들여 한 장의 조명이 비추는 듯하고, 커서가 떠나면 천천히 사그라듭니다.","hint":"카드들 위로 커서를 천천히 움직여 보세요","shape":"square","tags":["glow","border","spotlight","cards","hover"]} -->
+<!-- @demo [["wait",800],["glide",":root",0,[0.1,0.2],[0.9,0.3],1600,{"frame":":root","after":200}],["glide",":root",0,[0.9,0.3],[0.15,0.75],1500,{"frame":":root","after":200}],["glide",":root",0,[0.15,0.75],[0.55,0.52],1100,{"frame":":root","after":800}]] -->
+<!-- @en {"title":"Cursor-lit glowing card borders","summary":"Move the cursor over four feature cards on a dark screen and a soft glow centered on it spreads along the card borders while lightly brightening their insides. The light crosses the gaps between cards to tint the edges of neighboring cards too, as if one lamp were shining on them all, and fades slowly once the cursor leaves.","hint":"Move the cursor slowly across the cards","map":[
+  ["var CARDS = [['빠른 배포', '푸시 한 번에 전 세계로'], ['실시간 분석', '숫자가 바로 움직여요'], ['안전한 인증', '비밀번호 없이 로그인'], ['자동 확장', '사람이 몰려도 거뜬히']]", "var CARDS = [['Fast deploys', 'One push, worldwide'], ['Live analytics', 'Numbers that move instantly'], ['Secure auth', 'Sign in without passwords'], ['Auto scaling', 'Handles any rush']]"],
+  ["aria-label=\"기능 카드 네 장\"", "aria-label=\"Four feature cards\""]
+]} -->
+<style>
+.u228{position:relative;width:340px;height:340px;border-radius:30px;overflow:hidden;background:#0A0B10;box-shadow:0 0 0 1px var(--ux-line),0 30px 60px -36px var(--ux-shadow-strong);color:#E9ECF5;padding:18px;--x:-500px;--y:-500px;--o:0}
+.u228-gd{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;height:100%}
+.u228-c{position:relative;border-radius:18px;padding:1.5px;background:radial-gradient(160px circle at var(--cx) var(--cy),rgba(132,94,247,calc(var(--o) * 1)),rgba(77,171,247,calc(var(--o) * .5)) 40%,transparent 70%),rgba(255,255,255,.08)}
+.u228-in{position:relative;height:100%;border-radius:16.5px;background:radial-gradient(220px circle at var(--cx) var(--cy),rgba(132,94,247,calc(var(--o) * .14)),transparent 60%),#12141C;padding:14px;display:flex;flex-direction:column;gap:6px;overflow:hidden}
+.u228-ic{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.u228-ic svg{width:16px;height:16px}
+.u228-in b{margin-top:auto;font-size:13.5px;font-weight:800}
+.u228-in span{font-size:11px;font-weight:600;color:#8A90A6;word-break:keep-all}
+</style>
+<div class="ux u228"><div class="u228-gd" role="list" aria-label="기능 카드 네 장"></div></div>
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  var gd = root.querySelector('.u228-gd');
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var CARDS = [['빠른 배포', '푸시 한 번에 전 세계로'], ['실시간 분석', '숫자가 바로 움직여요'], ['안전한 인증', '비밀번호 없이 로그인'], ['자동 확장', '사람이 몰려도 거뜬히']];
+  var IC = ['<path d="M5 19l7-14 7 14-7-3z" fill="#B197FC"/>', '<path d="M4 18V9M10 18V5M16 18v-6M22 18H2" stroke="#74C0FC" stroke-width="2.2" stroke-linecap="round"/>', '<path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z" fill="#63E6BE"/>', '<path d="M4 14l4-4 4 4 8-8M14 6h6v6" stroke="#FFA94D" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'];
+  var C = CARDS.map(function (c, i) {
+    var el = document.createElement('div'); el.className = 'u228-c'; el.setAttribute('role', 'listitem');
+    el.innerHTML = '<div class="u228-in"><span class="u228-ic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">' + IC[i] + '</svg></span><b>' + c[0] + '</b><span>' + c[1] + '</span></div>';
+    gd.appendChild(el); return el;
+  });
+  var p = { x: -500, y: -500 }, o = 0, oT = 0, raf = 0, last = 0;
+  // 카드마다 자기 상자 기준 커서 좌표(--cx, --cy)를 넣어, 한 점 조명이 여러 카드를 함께 비추게 합니다
+  function apply() {
+    var rb = root.getBoundingClientRect(), k = root.offsetWidth / (rb.width || 1);
+    C.forEach(function (el) {
+      var r = el.getBoundingClientRect(), lx = p.x - (r.left - rb.left) * k, ly = p.y - (r.top - rb.top) * k;
+      el.style.setProperty('--cx', lx.toFixed(1) + 'px'); el.style.setProperty('--cy', ly.toFixed(1) + 'px'); el.style.setProperty('--o', o.toFixed(3));
+      el.firstChild.style.setProperty('--cx', (lx - 1.5).toFixed(1) + 'px'); el.firstChild.style.setProperty('--cy', (ly - 1.5).toFixed(1) + 'px');
+    });
+  }
+  function frame(now) {
+    raf = 0;
+    if (!root.isConnected) return;
+    var dt = Math.min(0.05, Math.max(0, (now - last) / 1000)); last = now;
+    o += (oT - o) * (rm ? 1 : Math.min(1, dt * (oT ? 8 : 2.5)));
+    apply();
+    if (Math.abs(oT - o) > 0.005) raf = requestAnimationFrame(frame);
+  }
+  function kick() { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+  root.addEventListener('pointermove', function (e) { var b = root.getBoundingClientRect(), k = root.offsetWidth / (b.width || 1); p = { x: (e.clientX - b.left) * k, y: (e.clientY - b.top) * k }; oT = 1; apply(); kick(); });
+  root.addEventListener('pointerleave', function () { oT = 0; kick(); });
+  apply();
+})();
+</script>

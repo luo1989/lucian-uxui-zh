@@ -1,0 +1,47 @@
+{
+ "id": "164",
+ "title": "重新分箱的直方图",
+ "summary": "把响应时间样本按区间分组的直方图。切换区间数量，柱子会重新归组，并标出最集中的区间。",
+ "hint": "在 4、8、12 区间按钮之间来回切换试试",
+ "kw": [
+  "直方图",
+  "分箱",
+  "区间",
+  "响应时间",
+  "分布图",
+  "统计图表",
+  "数据可视化",
+  "柱状图"
+ ],
+ "map": [
+  [
+   "응답 시간 분포",
+   "响应时间分布"
+  ],
+  [
+   "히스토그램 구간 개수",
+   "直方图区间数量"
+  ],
+  [
+   "4 구간",
+   "4 区间"
+  ],
+  [
+   "8 구간",
+   "8 区间"
+  ],
+  [
+   "12 구간",
+   "12 区间"
+  ],
+  [
+   "<div class=\"bin\" title=\"${Math.round(i*100/n)}–${Math.round((i+1)*100/n)}ms ${v}개\"><div class=\"bar\" style=\"--height:${v/max*130}px\"><b>${v}</b></div></div>",
+   "<div class=\"bin\" title=\"${Math.round(i*100/n)}–${Math.round((i+1)*100/n)}ms ${v}个\"><div class=\"bar\" style=\"--height:${v/max*130}px\"><b>${v}</b></div></div>"
+  ],
+  [
+   "최빈 ${Math.round(top*100/n)}–${Math.round((top+1)*100/n)} ms · ${max}개",
+   "最常见 ${Math.round(top*100/n)}–${Math.round((top+1)*100/n)} ms · ${max}个"
+  ]
+ ],
+ "demo": {}
+}
