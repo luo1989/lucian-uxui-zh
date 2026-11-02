@@ -971,7 +971,7 @@
     var kw = [it.tags.join(' '), CAT_EN[it.category] || '', CAT_ZH[it.category] || '', (zh.kw || []).join(' ')].join(' ').toLowerCase();
     var body = [it.summary, en.summary || '', zh.summary || '', zh.hint || '', it.category].join(' ').toLowerCase();
     return {
-      t: title, k: kw, b: body,
+      id: it.id, t: title, k: kw, b: body,
       all: (it.id + ' ' + title + ' ' + kw + ' ' + body + (it.set === 2 ? ' new 애니메이션 animation 动画 动效' : '')).toLowerCase()
     };
   });
@@ -986,6 +986,8 @@
   }
   // 返回匹配分：6=标题命中，5=关键词/分类/标签命中，3=说明命中，1=中文片段兜底，0=不匹配
   function matchScore(w, h) {
+    // 直接输入编号（001 / 201…）也能定位
+    if (h.id === w) return 7;
     if (h.t.indexOf(w) >= 0) return 6;
     if (h.k.indexOf(w) >= 0) return 5;
     if (h.b.indexOf(w) >= 0) return 3;
